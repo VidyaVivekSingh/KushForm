@@ -96177,51 +96177,24 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         return false;
       };
 
-      _this.renderAddress = function _callee2() {
-        var _this$props5, userName, userEmail, userImage, userMobile, userAddress, userLocation, userInfo;
+      _this.renderAddress = function () {
+        var _this$props5 = _this.props,
+            userName = _this$props5.userName,
+            userEmail = _this$props5.userEmail,
+            userImage = _this$props5.userImage,
+            userMobile = _this$props5.userMobile,
+            userAddress = _this$props5.userAddress,
+            userLocation = _this$props5.userLocation;
 
-        return _regenerator.default.async(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _this$props5 = _this.props, userName = _this$props5.userName, userEmail = _this$props5.userEmail, userImage = _this$props5.userImage, userMobile = _this$props5.userMobile, userAddress = _this$props5.userAddress, userLocation = _this$props5.userLocation;
-
-                if (!(userMobile !== '')) {
-                  _context2.next = 10;
-                  break;
-                }
-
-                if (!(userAddress === '')) {
-                  _context2.next = 6;
-                  break;
-                }
-
-                return _context2.abrupt("return", true);
-
-              case 6:
-                userInfo = {
-                  userName: userName,
-                  userEmail: userEmail,
-                  userImage: userImage,
-                  userMobile: userMobile,
-                  userLocation: userLocation,
-                  userAddress: userAddress
-                };
-                _context2.next = 9;
-                return _regenerator.default.awrap((0, _localStorage.saveUserInfo)(userInfo));
-
-              case 9:
-                return _context2.abrupt("return", false);
-
-              case 10:
-                return _context2.abrupt("return", false);
-
-              case 11:
-              case "end":
-                return _context2.stop();
-            }
+        if (userMobile !== '') {
+          if (userAddress === '') {
+            return true;
+          } else {
+            return false;
           }
-        });
+        } else {
+          return false;
+        }
       };
 
       _this.renderImageView = function () {
@@ -96235,7 +96208,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 174
+            lineNumber: 167
           }
         }, _react.default.createElement(_reactNative.TouchableOpacity, {
           style: {
@@ -96251,12 +96224,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 182
+            lineNumber: 175
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 192
+            lineNumber: 185
           }
         }, "Camera")), _react.default.createElement(_reactNative.View, {
           style: {
@@ -96264,7 +96237,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 194
+            lineNumber: 187
           }
         }), _react.default.createElement(_reactNative.TouchableOpacity, {
           onPress: function onPress() {
@@ -96280,24 +96253,54 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 195
+            lineNumber: 188
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 205
+            lineNumber: 198
           }
         }, "From Gallary")));
       };
 
+      _this.saveUser = function _callee2() {
+        var _this$props6, userName, userMobile, userEmail, userAddress, userImgUrl, userLocation, userInfo;
+
+        return _regenerator.default.async(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this$props6 = _this.props, userName = _this$props6.userName, userMobile = _this$props6.userMobile, userEmail = _this$props6.userEmail, userAddress = _this$props6.userAddress, userImgUrl = _this$props6.userImgUrl, userLocation = _this$props6.userLocation;
+                userInfo = {
+                  userName: userName,
+                  userEmail: userEmail,
+                  userImgUrl: userImgUrl,
+                  userMobile: userMobile,
+                  userLocation: userLocation,
+                  userAddress: userAddress
+                };
+                _context2.next = 4;
+                return _regenerator.default.awrap((0, _localStorage.saveUserInfo)(userInfo));
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        });
+      };
+
       _this.finalView = function () {
-        var _this$props6 = _this.props,
-            userName = _this$props6.userName,
-            userMobile = _this$props6.userMobile,
-            userEmail = _this$props6.userEmail,
-            userAddress = _this$props6.userAddress,
-            userImgUrl = _this$props6.userImgUrl,
-            userLocation = _this$props6.userLocation;
+        var _this$props7 = _this.props,
+            userName = _this$props7.userName,
+            userMobile = _this$props7.userMobile,
+            userEmail = _this$props7.userEmail,
+            userAddress = _this$props7.userAddress,
+            userImgUrl = _this$props7.userImgUrl,
+            userLocation = _this$props7.userLocation;
+
+        _this.saveUser();
+
         return _react.default.createElement(_reactNative.View, {
           style: {
             flex: 1,
@@ -96306,7 +96309,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 221
+            lineNumber: 235
           }
         }, _react.default.createElement(_reactNative.Image, {
           source: {
@@ -96319,49 +96322,49 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 222
+            lineNumber: 236
           }
         }), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 230
+            lineNumber: 244
           }
         }, "User Name: ", userName), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 231
+            lineNumber: 245
           }
         }, "User Email : ", userEmail), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 232
+            lineNumber: 246
           }
         }, "Phone Number : ", userMobile), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 233
+            lineNumber: 247
           }
         }, "Address : ", userAddress), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 234
+            lineNumber: 248
           }
         }, "Latitude : ", userLocation.latitude), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 235
+            lineNumber: 249
           }
         }, "Longitude : ", userLocation.longitude));
       };
 
       _this.renderView = function () {
-        var _this$props7 = _this.props,
-            userName = _this$props7.userName,
-            userMobile = _this$props7.userMobile,
-            userEmail = _this$props7.userEmail,
-            userAddress = _this$props7.userAddress,
-            userImgUrl = _this$props7.userImgUrl,
-            userLocation = _this$props7.userLocation;
+        var _this$props8 = _this.props,
+            userName = _this$props8.userName,
+            userMobile = _this$props8.userMobile,
+            userEmail = _this$props8.userEmail,
+            userAddress = _this$props8.userAddress,
+            userImgUrl = _this$props8.userImgUrl,
+            userLocation = _this$props8.userLocation;
         return _react.default.createElement(_reactNative.View, {
           style: {
             flex: 1,
@@ -96369,14 +96372,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 250
+            lineNumber: 264
           }
         }, _this.renderName() ? _react.default.createElement(_TextInput.default, {
           placeholder: 'Enter name',
           onNext: _this.onNext,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 252
+            lineNumber: 266
           }
         }) : null, _this.renderEmail() ? _react.default.createElement(_TextInput.default, {
           placeholder: 'Enter email',
@@ -96384,7 +96387,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           onNext: _this.onNext,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 255
+            lineNumber: 269
           }
         }) : null, _this.renderImage() ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactNative.View, {
           style: {
@@ -96394,7 +96397,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 263
+            lineNumber: 277
           }
         }, _react.default.createElement(_reactNative.Image, {
           source: {
@@ -96407,9 +96410,9 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 269
+            lineNumber: 283
           }
-        }), userImgUrl === '' ? _this.renderImageView() : null, userImgUrl ? _react.default.createElement(_reactNative.View, {
+        }), userImgUrl === '' ? _this.renderImageView() : null, userImgUrl !== '' ? _react.default.createElement(_reactNative.View, {
           style: {
             alignSelf: 'center',
             height: 50,
@@ -96419,7 +96422,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 279
+            lineNumber: 293
           }
         }, _react.default.createElement(_reactNative.TouchableOpacity, {
           style: {
@@ -96432,12 +96435,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 287
+            lineNumber: 301
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 294
+            lineNumber: 308
           }
         }, "Next"))) : null)) : null, _this.renderPhone() ? _react.default.createElement(_TextInput.default, {
           maxLength: 10,
@@ -96446,7 +96449,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           onNext: _this.onNext,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 302
+            lineNumber: 316
           }
         }) : null, _this.renderAddress() ? (_this.getLocation(), _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactNative.View, {
           style: {
@@ -96456,26 +96459,26 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 313
+            lineNumber: 327
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 319
+            lineNumber: 333
           }
         }, "longitude=", userLocation.longitude), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 320
+            lineNumber: 334
           }
         }, "latitude=", userLocation.latitude)), _react.default.createElement(_TextInput.default, {
           placeholder: 'Enter address',
           onNext: _this.onNext,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 322
+            lineNumber: 336
           }
-        }))) : null, userAddress ? _react.default.createElement(_reactNative.View, {
+        }))) : null, userAddress !== '' ? _react.default.createElement(_reactNative.View, {
           style: {
             flex: 1,
             justifyContent: 'center',
@@ -96483,7 +96486,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 330
+            lineNumber: 344
           }
         }, _react.default.createElement(_reactNative.Image, {
           source: {
@@ -96496,37 +96499,37 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 332
+            lineNumber: 346
           }
-        }), _react.default.createElement(_reactNative.Text, {
+        }), _this.saveUser, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 340
+            lineNumber: 355
           }
         }, "User Name: ", userName), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 341
+            lineNumber: 356
           }
         }, "User Email : ", userEmail), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 342
+            lineNumber: 357
           }
         }, "Phone Number : ", userMobile), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 343
+            lineNumber: 358
           }
         }, "Address : ", userAddress), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 344
+            lineNumber: 359
           }
         }, "Latitude : ", userLocation.latitude), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 345
+            lineNumber: 360
           }
         }, "Longitude : ", userLocation.longitude)) : null);
       };
@@ -96554,13 +96557,13 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     }, {
       key: "render",
       value: function render() {
-        var _this$props8 = this.props,
-            userName = _this$props8.userName,
-            userMobile = _this$props8.userMobile,
-            userEmail = _this$props8.userEmail,
-            userAddress = _this$props8.userAddress,
-            userImgUrl = _this$props8.userImgUrl,
-            userLocation = _this$props8.userLocation;
+        var _this$props9 = this.props,
+            userName = _this$props9.userName,
+            userMobile = _this$props9.userMobile,
+            userEmail = _this$props9.userEmail,
+            userAddress = _this$props9.userAddress,
+            userImgUrl = _this$props9.userImgUrl,
+            userLocation = _this$props9.userLocation;
         return userAddress !== '' ? this.finalView() : this.renderView();
       }
     }]);
@@ -98977,10 +98980,10 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             return _regenerator.default.awrap(_reactNative.AsyncStorage.setItem('userEmail', userInfo.userEmail));
 
           case 7:
-            _reactNative.AsyncStorage.removeItem('userImage');
+            _reactNative.AsyncStorage.removeItem('userImgUrl');
 
             _context.next = 10;
-            return _regenerator.default.awrap(_reactNative.AsyncStorage.setItem('userImage', userInfo.userImage));
+            return _regenerator.default.awrap(_reactNative.AsyncStorage.setItem('userImgUrl', userInfo.userImgUrl));
 
           case 10:
             _reactNative.AsyncStorage.removeItem('userMobile');

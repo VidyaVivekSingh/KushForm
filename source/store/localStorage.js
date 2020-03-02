@@ -8,8 +8,8 @@ export const saveUserInfo = async userInfo => {
     AsyncStorage.removeItem('userEmail');
     await AsyncStorage.setItem('userEmail', userInfo.userEmail);
 
-    AsyncStorage.removeItem('userImage');
-    await AsyncStorage.setItem('userImage', userInfo.userImage);
+    AsyncStorage.removeItem('userImgUrl');
+    await AsyncStorage.setItem('userImgUrl', userInfo.userImgUrl);
 
     AsyncStorage.removeItem('userMobile');
     await AsyncStorage.setItem('userMobile', userInfo.userMobile);
@@ -49,4 +49,24 @@ export const getUserPhone = async () => {
 export const getUserLocation = async () => {
   const userLocation = await AsyncStorage.getItem('userLocation');
   return userLocation;
+};
+
+export const getUserAddress = async () => {
+  const userAddress = await AsyncStorage.getItem('userAddress');
+  return userAddress;
+};
+
+export const getUserDetails = async () => {
+  const userData = {
+    userName: getUserName(),
+    userEmail: getUserEmail(),
+    userMobile: getUserPhone(),
+    userImage: getUserImage(),
+    userLocation: getUserLocation(),
+    userAddress: getUserAddress(),
+  };
+  let res = userData.map(data => {
+    if (data.value === '') return false;
+  });
+  return userData;
 };

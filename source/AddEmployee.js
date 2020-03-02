@@ -4,7 +4,7 @@ import CustomTextInput from './components/TextInput';
 import GetLocation from 'react-native-get-location';
 import ImagePickerCrop from 'react-native-image-crop-picker';
 import {connect} from 'react-redux';
-import {saveUserInfo} from './store/localStorage';
+import {saveUserInfo, getUserDetails} from './store/localStorage';
 import {
   resetState,
   updateUserAddress,
@@ -124,6 +124,10 @@ class AddEmployee extends PureComponent {
     return false;
   };
 
+  initCheck = () => {
+    getUserDetails();
+  };
+
   renderImage = () => {
     const {userEmail, userImgUrl} = this.props;
     if (userEmail !== '') {
@@ -142,7 +146,7 @@ class AddEmployee extends PureComponent {
     return false;
   };
 
-  renderAddress = async () => {
+  renderAddress = () => {
     const {
       userName,
       userEmail,
@@ -152,21 +156,14 @@ class AddEmployee extends PureComponent {
       userLocation,
     } = this.props;
     if (userMobile !== '') {
-      if (userAddress === '') return true;
-      else {
-        const userInfo = {
-          userName: userName,
-          userEmail: userEmail,
-          userImage: userImage,
-          userMobile: userMobile,
-          userLocation: userLocation,
-          userAddress: userAddress,
-        };
-        await saveUserInfo(userInfo);
+      if (userAddress === '') {
+        return true;
+      } else {
         return false;
       }
+    } else {
+      return false;
     }
-    return false;
   };
 
   renderImageView = () => {
@@ -208,6 +205,26 @@ class AddEmployee extends PureComponent {
     );
   };
 
+  saveUser = async () => {
+    const {
+      userName,
+      userMobile,
+      userEmail,
+      userAddress,
+      userImgUrl,
+      userLocation,
+    } = this.props;
+    const userInfo = {
+      userName: userName,
+      userEmail: userEmail,
+      userImgUrl: userImgUrl,
+      userMobile: userMobile,
+      userLocation: userLocation,
+      userAddress: userAddress,
+    };
+    await saveUserInfo(userInfo);
+  };
+
   finalView = () => {
     const {
       userName,
@@ -217,6 +234,7 @@ class AddEmployee extends PureComponent {
       userImgUrl,
       userLocation,
     } = this.props;
+    this.saveUser();
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Image
@@ -275,7 +293,7 @@ class AddEmployee extends PureComponent {
                 }}
               />
               {userImgUrl === '' ? this.renderImageView() : null}
-              {userImgUrl ? (
+              {userImgUrl !== '' ? (
                 <View
                   style={{
                     alignSelf: 'center',
@@ -326,7 +344,7 @@ class AddEmployee extends PureComponent {
               </>
             ))
           : null}
-        {userAddress ? (
+        {userAddress !== '' ? (
           <View
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <Image
@@ -337,6 +355,7 @@ class AddEmployee extends PureComponent {
                 borderRadius: 280,
               }}
             />
+            {this.saveUser}
             <Text>User Name: {userName}</Text>
             <Text>User Email : {userEmail}</Text>
             <Text>Phone Number : {userMobile}</Text>
@@ -358,7 +377,7 @@ class AddEmployee extends PureComponent {
       userLocation,
     } = this.props;
 
-    return userAddress !== '' ? this.finalView() : this.renderView();
+    return this.initCheck ? this.finalView() : this.renderView();
   }
 }
 
