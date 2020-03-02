@@ -11,8 +11,8 @@ import {
 const initialState = {
   userName: '',
   userEmail: '',
-  userImgURL: '',
-  userPhone: '',
+  userImgUrl: '',
+  userMobile: '',
   userLocation: {
     latitude: '',
     longitude: '',
@@ -30,7 +30,7 @@ const appReducer = (state = initialState, action) => {
     case UPDATE_USER_MOBILE:
       return {
         ...state,
-        userPhone: action.payload,
+        userMobile: action.payload,
       };
     case UPDATE_USER_EMAIL:
       return {
@@ -45,24 +45,24 @@ const appReducer = (state = initialState, action) => {
     case UPDATE_USER_LOCATION:
       return {
         ...state,
-        userLocation: action.payload,
-      };
-    case UPDATE_USER_IMAGE:
-      return {
-        ...state,
         userLocation: {
           ...state.userLocation,
           latitude: action.payload.latitude,
           longitude: action.payload.longitude,
         },
       };
+    case UPDATE_USER_IMAGE:
+      return {
+        ...state,
+        userImgUrl: action.payload,
+      };
     case RESET_STATE:
       return {
         ...state,
         userName: '',
         userEmail: '',
-        userImgURL: '',
-        userPhone: '',
+        userImgUrl: '',
+        userMobile: '',
         userLocation: {
           latitude: '',
           longitude: '',

@@ -11,8 +11,8 @@ export const saveUserInfo = async userInfo => {
     AsyncStorage.removeItem('userImage');
     await AsyncStorage.setItem('userImage', userInfo.userImage);
 
-    AsyncStorage.removeItem('userPhone');
-    await AsyncStorage.setItem('userPhone', userInfo.userPhone);
+    AsyncStorage.removeItem('userMobile');
+    await AsyncStorage.setItem('userMobile', userInfo.userMobile);
 
     AsyncStorage.removeItem('userLocation');
     await AsyncStorage.setItem('userLocation', userInfo.userLocation);
@@ -42,8 +42,8 @@ export const getUserEmail = async () => {
 };
 
 export const getUserPhone = async () => {
-  const userPhone = await AsyncStorage.getItem('userPhone');
-  return userPhone;
+  const userMobile = await AsyncStorage.getItem('userMobile');
+  return userMobile;
 };
 
 export const getUserLocation = async () => {

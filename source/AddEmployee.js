@@ -4,6 +4,7 @@ import CustomTextInput from './components/TextInput';
 import GetLocation from 'react-native-get-location';
 import ImagePickerCrop from 'react-native-image-crop-picker';
 import {connect} from 'react-redux';
+import {saveUserInfo} from './store/localStorage';
 import {
   resetState,
   updateUserAddress,
@@ -35,21 +36,8 @@ const mapDispatchToProps = dispatch => ({
   updateState: () => dispatch(resetState()),
 });
 class AddEmployee extends PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
-      email: '',
-      image: '',
-      phoneNumber: '',
-      address: '',
-      latitude: '',
-      longitude: '',
-      imageUrl: '',
-    };
-  }
-
   callImagePicker = mode => {
+    const {updateImage} = this.props;
     if (mode === 'Camera') {
       ImagePickerCrop.openCamera({
         cropping: true,
@@ -62,7 +50,7 @@ class AddEmployee extends PureComponent {
         includeExif: true,
         avoidEmptySpaceAroundImage: true,
       }).then(image => {
-        this.setState({imageUrl: image.path});
+        updateImage(image.path);
       });
     } else {
       ImagePickerCrop.openPicker({
@@ -76,23 +64,20 @@ class AddEmployee extends PureComponent {
         includeExif: true,
         avoidEmptySpaceAroundImage: true,
       }).then(image => {
-        this.setState({imageUrl: image.path});
+        updateImage(image.path);
       });
     }
   };
 
   getLocation() {
+    const {updateLocation} = this.props;
     GetLocation.getCurrentPosition({
       enableHighAccuracy: true,
       timeout: 15000,
     })
       .then(location => {
         console.log(location);
-        this.setState({
-          longitude: location.longitude,
-          latitude: location.latitude,
-        });
-        updateUserLocation(location);
+        updateLocation(location);
       })
       .catch(error => {
         const {code, message} = error;
@@ -110,34 +95,29 @@ class AddEmployee extends PureComponent {
     } = this.props;
     console.log('pressed', data);
     if (placeholder === 'Upload Image') {
-      this.setState({image: data});
-      updateImage(data);
+      await updateImage(data);
     } else if (placeholder === 'Enter name') {
-      await this.setState({name: data});
       await updateName(data);
     } else if (placeholder === 'Enter email') {
-      this.setState({email: data});
-      updateEmail(data);
+      await updateEmail(data);
     } else if (placeholder === 'Enter phone') {
-      this.setState({phoneNumber: data});
-      updateMobile(data);
+      await updateMobile(data);
     } else if (placeholder === 'Enter address') {
-      this.setState({address: data});
-      updateAddress(data);
+      await updateAddress(data);
     }
   };
 
   renderName = () => {
-    const {name} = this.state;
+    const {userName} = this.props;
     let returnData = false;
-    if (name === '') returnData = true;
+    if (userName === '') returnData = true;
     return returnData;
   };
 
   renderEmail = () => {
-    const {name, email} = this.state;
-    if (name) {
-      if (email === '') {
+    const {userName, userEmail} = this.props;
+    if (userName !== '') {
+      if (userEmail === '') {
         return true;
       } else return false;
     }
@@ -145,28 +125,46 @@ class AddEmployee extends PureComponent {
   };
 
   renderImage = () => {
-    const {email, image} = this.state;
-    if (email) {
-      if (image === '') return true;
+    const {userEmail, userImgUrl} = this.props;
+    if (userEmail !== '') {
+      if (userImgUrl === '') return true;
       else return false;
     }
     return false;
   };
 
   renderPhone = () => {
-    const {image, phoneNumber} = this.state;
-    if (image) {
-      if (phoneNumber === '') return true;
+    const {userImgUrl, userMobile} = this.props;
+    if (userImgUrl !== '') {
+      if (userMobile === '') return true;
       else return false;
     }
     return false;
   };
 
-  renderAddress = () => {
-    const {phoneNumber, address} = this.state;
-    if (phoneNumber) {
-      if (address === '') return true;
-      else return false;
+  renderAddress = async () => {
+    const {
+      userName,
+      userEmail,
+      userImage,
+      userMobile,
+      userAddress,
+      userLocation,
+    } = this.props;
+    if (userMobile !== '') {
+      if (userAddress === '') return true;
+      else {
+        const userInfo = {
+          userName: userName,
+          userEmail: userEmail,
+          userImage: userImage,
+          userMobile: userMobile,
+          userLocation: userLocation,
+          userAddress: userAddress,
+        };
+        await saveUserInfo(userInfo);
+        return false;
+      }
     }
     return false;
   };
@@ -210,7 +208,44 @@ class AddEmployee extends PureComponent {
     );
   };
 
-  render() {
+  finalView = () => {
+    const {
+      userName,
+      userMobile,
+      userEmail,
+      userAddress,
+      userImgUrl,
+      userLocation,
+    } = this.props;
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+          source={{uri: userImgUrl}}
+          style={{
+            height: 140,
+            width: 140,
+            borderRadius: 280,
+          }}
+        />
+        <Text>User Name: {userName}</Text>
+        <Text>User Email : {userEmail}</Text>
+        <Text>Phone Number : {userMobile}</Text>
+        <Text>Address : {userAddress}</Text>
+        <Text>Latitude : {userLocation.latitude}</Text>
+        <Text>Longitude : {userLocation.longitude}</Text>
+      </View>
+    );
+  };
+
+  renderView = () => {
+    const {
+      userName,
+      userMobile,
+      userEmail,
+      userAddress,
+      userImgUrl,
+      userLocation,
+    } = this.props;
     return (
       <View style={{flex: 1, backgroundColor: 'white'}}>
         {this.renderName() ? (
@@ -232,15 +267,15 @@ class AddEmployee extends PureComponent {
                 alignItems: 'center',
               }}>
               <Image
-                source={{uri: this.state.imageUrl}}
+                source={{uri: userImgUrl}}
                 style={{
                   height: 140,
                   width: 140,
                   borderRadius: 280,
                 }}
               />
-              {this.state.imageUrl === '' ? this.renderImageView() : null}
-              {this.state.imageUrl ? (
+              {userImgUrl === '' ? this.renderImageView() : null}
+              {userImgUrl ? (
                 <View
                   style={{
                     alignSelf: 'center',
@@ -255,9 +290,7 @@ class AddEmployee extends PureComponent {
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}
-                    onPress={() =>
-                      this.onNext('Upload Image', this.state.imageUrl)
-                    }>
+                    onPress={() => this.onNext('Upload Image', userImgUrl)}>
                     <Text>Next</Text>
                   </TouchableOpacity>
                 </View>
@@ -283,8 +316,8 @@ class AddEmployee extends PureComponent {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Text>longitude={this.state.longitude}</Text>
-                  <Text>latitude={this.state.latitude}</Text>
+                  <Text>longitude={userLocation.longitude}</Text>
+                  <Text>latitude={userLocation.latitude}</Text>
                 </View>
                 <CustomTextInput
                   placeholder={'Enter address'}
@@ -293,27 +326,39 @@ class AddEmployee extends PureComponent {
               </>
             ))
           : null}
-        {this.state.address ? (
+        {userAddress ? (
           <View
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <Image
-              source={{uri: this.state.imageUrl}}
+              source={{uri: userImgUrl}}
               style={{
                 height: 140,
                 width: 140,
                 borderRadius: 280,
               }}
             />
-            <Text>User Name: {this.state.name}</Text>
-            <Text>User Email : {this.state.email}</Text>
-            <Text>Phone Number : {this.state.phoneNumber}</Text>
-            <Text>Address : {this.state.address}</Text>
-            <Text>Latitude : {this.state.latitude}</Text>
-            <Text>Longitude : {this.state.longitude}</Text>
+            <Text>User Name: {userName}</Text>
+            <Text>User Email : {userEmail}</Text>
+            <Text>Phone Number : {userMobile}</Text>
+            <Text>Address : {userAddress}</Text>
+            <Text>Latitude : {userLocation.latitude}</Text>
+            <Text>Longitude : {userLocation.longitude}</Text>
           </View>
         ) : null}
       </View>
     );
+  };
+  render() {
+    const {
+      userName,
+      userMobile,
+      userEmail,
+      userAddress,
+      userImgUrl,
+      userLocation,
+    } = this.props;
+
+    return userAddress !== '' ? this.finalView() : this.renderView();
   }
 }
 
