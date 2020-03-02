@@ -1316,7 +1316,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var _c;
 
   $RefreshReg$(_c, "RNRedux");
-},0,[1,2,54,447,452,453,464],"index.js");
+},0,[1,2,54,447,481,452,482],"index.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -95937,27 +95937,70 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   });
   exports.default = void 0;
 
-  var _classCallCheck2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "@babel/runtime/helpers/classCallCheck"));
+  var _regenerator = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "@babel/runtime/regenerator"));
 
-  var _createClass2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "@babel/runtime/helpers/createClass"));
+  var _classCallCheck2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "@babel/runtime/helpers/classCallCheck"));
 
-  var _possibleConstructorReturn2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[4], "@babel/runtime/helpers/possibleConstructorReturn"));
+  var _createClass2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[4], "@babel/runtime/helpers/createClass"));
 
-  var _getPrototypeOf2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[5], "@babel/runtime/helpers/getPrototypeOf"));
+  var _possibleConstructorReturn2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[5], "@babel/runtime/helpers/possibleConstructorReturn"));
 
-  var _inherits2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[6], "@babel/runtime/helpers/inherits"));
+  var _getPrototypeOf2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[6], "@babel/runtime/helpers/getPrototypeOf"));
 
-  var _react = _interopRequireWildcard(_$$_REQUIRE(_dependencyMap[7], "react"));
+  var _inherits2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[7], "@babel/runtime/helpers/inherits"));
 
-  var _reactNative = _$$_REQUIRE(_dependencyMap[8], "react-native");
+  var _react = _interopRequireWildcard(_$$_REQUIRE(_dependencyMap[8], "react"));
 
-  var _TextInput = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[9], "./components/TextInput"));
+  var _reactNative = _$$_REQUIRE(_dependencyMap[9], "react-native");
 
-  var _reactNativeGetLocation = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[10], "react-native-get-location"));
+  var _TextInput = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[10], "./components/TextInput"));
 
-  var _reactNativeImageCropPicker = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[11], "react-native-image-crop-picker"));
+  var _reactNativeGetLocation = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[11], "react-native-get-location"));
+
+  var _reactNativeImageCropPicker = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[12], "react-native-image-crop-picker"));
+
+  var _reactRedux = _$$_REQUIRE(_dependencyMap[13], "react-redux");
+
+  var _appAction = _$$_REQUIRE(_dependencyMap[14], "../source/store/actions/app-action");
 
   var _jsxFileName = "/Users/pratian/Desktop/Learning/Employee_Form/source/AddEmployee.js";
+
+  var mapStateToProps = function mapStateToProps(state) {
+    return {
+      userName: state.app.userName,
+      userMobile: state.app.userMobile,
+      userEmail: state.app.userEmail,
+      userAddress: state.app.userAddress,
+      userImgUrl: state.app.userImgUrl,
+      userLocation: state.app.userLocation
+    };
+  };
+
+  var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+      updateName: function updateName(name) {
+        return dispatch((0, _appAction.updateUserName)(name));
+      },
+      updateMobile: function updateMobile(mobile) {
+        return dispatch((0, _appAction.updateUserMobile)(mobile));
+      },
+      updateAddress: function updateAddress(address) {
+        return dispatch((0, _appAction.updateUserAddress)(address));
+      },
+      updateLocation: function updateLocation(location) {
+        return dispatch((0, _appAction.updateUserLocation)(location));
+      },
+      updateEmail: function updateEmail(email) {
+        return dispatch((0, _appAction.updateUserEmail)(email));
+      },
+      updateImage: function updateImage(img) {
+        return dispatch((0, _appAction.updateUserImage)(img));
+      },
+      updateState: function updateState() {
+        return dispatch((0, _appAction.resetState)());
+      }
+    };
+  };
 
   var AddEmployee = function (_PureComponent) {
     (0, _inherits2.default)(AddEmployee, _PureComponent);
@@ -96004,22 +96047,75 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         }
       };
 
-      _this.onNext = function (placeholder, data) {
-        console.log('pressed', data);
-        if (placeholder === 'Upload Image') _this.setState({
-          image: data
-        });
-        if (placeholder === 'Enter name') _this.setState({
-          name: data
-        });
-        if (placeholder === 'Enter email') _this.setState({
-          email: data
-        });
-        if (placeholder === 'Enter phone') _this.setState({
-          phoneNumber: data
-        });
-        if (placeholder === 'Enter address') _this.setState({
-          address: data
+      _this.onNext = function _callee(placeholder, data) {
+        var _this$props, updateName, updateAddress, updateEmail, updateMobile, updateImage;
+
+        return _regenerator.default.async(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this$props = _this.props, updateName = _this$props.updateName, updateAddress = _this$props.updateAddress, updateEmail = _this$props.updateEmail, updateMobile = _this$props.updateMobile, updateImage = _this$props.updateImage;
+                console.log('pressed', data);
+
+                if (!(placeholder === 'Upload Image')) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _this.setState({
+                  image: data
+                });
+
+                updateImage(data);
+                _context.next = 16;
+                break;
+
+              case 7:
+                if (!(placeholder === 'Enter name')) {
+                  _context.next = 15;
+                  break;
+                }
+
+                _context.next = 10;
+                return _regenerator.default.awrap(_this.setState({
+                  name: data
+                }));
+
+              case 10:
+                _context.next = 12;
+                return _regenerator.default.awrap(updateName(data));
+
+              case 12:
+                console.log('aaya', _this.props.userName);
+                _context.next = 16;
+                break;
+
+              case 15:
+                if (placeholder === 'Enter email') {
+                  _this.setState({
+                    email: data
+                  });
+
+                  updateEmail(data);
+                } else if (placeholder === 'Enter phone') {
+                  _this.setState({
+                    phoneNumber: data
+                  });
+
+                  updateMobile(data);
+                } else if (placeholder === 'Enter address') {
+                  _this.setState({
+                    address: data
+                  });
+
+                  updateAddress(data);
+                }
+
+              case 16:
+              case "end":
+                return _context.stop();
+            }
+          }
         });
       };
 
@@ -96091,7 +96187,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 127
+            lineNumber: 177
           }
         }, _react.default.createElement(_reactNative.TouchableOpacity, {
           style: {
@@ -96107,12 +96203,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 135
+            lineNumber: 185
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 145
+            lineNumber: 195
           }
         }, "Camera")), _react.default.createElement(_reactNative.View, {
           style: {
@@ -96120,7 +96216,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 147
+            lineNumber: 197
           }
         }), _react.default.createElement(_reactNative.TouchableOpacity, {
           onPress: function onPress() {
@@ -96136,12 +96232,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 148
+            lineNumber: 198
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 158
+            lineNumber: 208
           }
         }, "From Gallary")));
       };
@@ -96174,6 +96270,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             longitude: location.longitude,
             latitude: location.latitude
           });
+
+          (0, _appAction.updateUserLocation)(location);
         }).catch(function (error) {
           var code = error.code,
               message = error.message;
@@ -96192,14 +96290,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 166
+            lineNumber: 216
           }
         }, this.renderName() ? _react.default.createElement(_TextInput.default, {
           placeholder: 'Enter name',
           onNext: this.onNext,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 168
+            lineNumber: 218
           }
         }) : null, this.renderEmail() ? _react.default.createElement(_TextInput.default, {
           placeholder: 'Enter email',
@@ -96207,7 +96305,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           onNext: this.onNext,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 171
+            lineNumber: 221
           }
         }) : null, this.renderImage() ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactNative.View, {
           style: {
@@ -96217,7 +96315,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 179
+            lineNumber: 229
           }
         }, _react.default.createElement(_reactNative.Image, {
           source: {
@@ -96230,7 +96328,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 185
+            lineNumber: 235
           }
         }), this.state.imageUrl === '' ? this.renderImageView() : null, this.state.imageUrl ? _react.default.createElement(_reactNative.View, {
           style: {
@@ -96242,7 +96340,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 195
+            lineNumber: 245
           }
         }, _react.default.createElement(_reactNative.TouchableOpacity, {
           style: {
@@ -96255,12 +96353,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 203
+            lineNumber: 253
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 212
+            lineNumber: 262
           }
         }, "Next"))) : null)) : null, this.renderPhone() ? _react.default.createElement(_TextInput.default, {
           maxLength: 10,
@@ -96269,7 +96367,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           onNext: this.onNext,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 220
+            lineNumber: 270
           }
         }) : null, this.renderAddress() ? (this.getLocation(), _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactNative.View, {
           style: {
@@ -96279,24 +96377,24 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 231
+            lineNumber: 281
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 237
+            lineNumber: 287
           }
         }, "longitude=", this.state.longitude), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 238
+            lineNumber: 288
           }
         }, "latitude=", this.state.latitude)), _react.default.createElement(_TextInput.default, {
           placeholder: 'Enter address',
           onNext: this.onNext,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 240
+            lineNumber: 290
           }
         }))) : null, this.state.address ? _react.default.createElement(_reactNative.View, {
           style: {
@@ -96306,7 +96404,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 248
+            lineNumber: 298
           }
         }, _react.default.createElement(_reactNative.Image, {
           source: {
@@ -96319,37 +96417,37 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 250
+            lineNumber: 300
           }
         }), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 258
+            lineNumber: 308
           }
         }, "User Name: ", this.state.name), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 259
+            lineNumber: 309
           }
         }, "User Email : ", this.state.email), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 260
+            lineNumber: 310
           }
         }, "Phone Number : ", this.state.phoneNumber), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 261
+            lineNumber: 311
           }
         }, "Address : ", this.state.address), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 262
+            lineNumber: 312
           }
         }, "Latitude : ", this.state.latitude), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 263
+            lineNumber: 313
           }
         }, "Longitude : ", this.state.longitude)) : null);
       }
@@ -96357,8 +96455,10 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     return AddEmployee;
   }(_react.PureComponent);
 
-  exports.default = AddEmployee;
-},447,[1,9,24,25,32,34,37,54,2,448,449,451],"source/AddEmployee.js");
+  var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AddEmployee);
+
+  exports.default = _default;
+},447,[1,9,103,24,25,32,34,37,54,2,448,449,451,452,479],"source/AddEmployee.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
 
@@ -96393,12 +96493,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         get = _useState2[0],
         set = _useState2[1];
 
-    checkNumber = function checkNumber(number) {
+    var checkNumber = function checkNumber(number) {
       var pattern = /^\d{10}$/;
       return pattern.test(number);
     };
 
-    checkEmail = function checkEmail(email) {
+    var checkEmail = function checkEmail(email) {
       var pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       return pattern.test(email);
     };
@@ -96408,7 +96508,9 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         checkEmail(get) ? onNext(placeholder, get) : alert(placeholder + " field data is not valid");
       } else if (placeholder === 'Enter phone') {
         checkNumber(get) ? onNext(placeholder, get) : alert(placeholder + " field data is not valid");
-      } else onNext(placeholder, get);
+      } else {
+        onNext(placeholder, get);
+      }
     };
 
     return _react.default.createElement(_reactNative.View, {
@@ -96418,7 +96520,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 31
+        lineNumber: 33
       }
     }, _react.default.createElement(_reactNative.View, {
       style: {
@@ -96426,7 +96528,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 32
+        lineNumber: 34
       }
     }, _react.default.createElement(_reactNative.TextInput, {
       placeholder: placeholder,
@@ -96438,7 +96540,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       underlineColorAndroid: 'red',
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 33
+        lineNumber: 35
       }
     })), _react.default.createElement(_reactNative.View, {
       style: {
@@ -96450,7 +96552,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 41
+        lineNumber: 43
       }
     }, _react.default.createElement(_reactNative.TouchableOpacity, {
       style: {
@@ -96463,12 +96565,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 51
       }
     }, _react.default.createElement(_reactNative.Text, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 56
+        lineNumber: 58
       }
     }, "Next"))));
   };
@@ -96843,12 +96945,6 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var _default = _reactNative.NativeModules.ImageCropPicker;
   exports.default = _default;
 },451,[1,54,2],"node_modules/react-native-image-crop-picker/index.js");
-__d(function(global, require, _aUnused, _bUnused, module, exports, _cUnused) {
-  module.exports = {
-  "name": "employeeform",
-  "displayName": "employeeform"
-};
-},452,[],"app.json");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   "use strict";
 
@@ -96897,7 +96993,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   exports.shallowEqual = _shallowEqual["default"];
   (0, _batch.setBatch)(_reactBatchedUpdates.unstable_batchedUpdates);
-},453,[1,454,455,456,457,458,459,460,461,462,463],"node_modules/react-redux/lib/index.js");
+},452,[1,453,457,454,460,474,477,475,456,478,461],"node_modules/react-redux/lib/index.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   "use strict";
 
@@ -96964,7 +97060,179 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var _default = Provider;
   exports["default"] = _default;
-},454,[1,9,54,69,456,473],"node_modules/react-redux/lib/components/Provider.js");
+},453,[1,9,54,69,454,455],"node_modules/react-redux/lib/components/Provider.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  exports.__esModule = true;
+  exports["default"] = exports.ReactReduxContext = void 0;
+
+  var _react = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "react"));
+
+  var ReactReduxContext = _react["default"].createContext(null);
+
+  exports.ReactReduxContext = ReactReduxContext;
+
+  if (process.env.NODE_ENV !== 'production') {
+    ReactReduxContext.displayName = 'ReactRedux';
+  }
+
+  var _default = ReactReduxContext;
+  exports["default"] = _default;
+},454,[1,54],"node_modules/react-redux/lib/components/Context.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports["default"] = void 0;
+
+  var _batch = _$$_REQUIRE(_dependencyMap[0], "./batch");
+
+  var nullListeners = {
+    notify: function notify() {}
+  };
+
+  function createListenerCollection() {
+    var batch = (0, _batch.getBatch)();
+    var first = null;
+    var last = null;
+    return {
+      clear: function clear() {
+        first = null;
+        last = null;
+      },
+      notify: function notify() {
+        batch(function () {
+          var listener = first;
+
+          while (listener) {
+            listener.callback();
+            listener = listener.next;
+          }
+        });
+      },
+      get: function get() {
+        var listeners = [];
+        var listener = first;
+
+        while (listener) {
+          listeners.push(listener);
+          listener = listener.next;
+        }
+
+        return listeners;
+      },
+      subscribe: function subscribe(callback) {
+        var isSubscribed = true;
+        var listener = last = {
+          callback: callback,
+          next: null,
+          prev: last
+        };
+
+        if (listener.prev) {
+          listener.prev.next = listener;
+        } else {
+          first = listener;
+        }
+
+        return function unsubscribe() {
+          if (!isSubscribed || first === null) return;
+          isSubscribed = false;
+
+          if (listener.next) {
+            listener.next.prev = listener.prev;
+          } else {
+            last = listener.prev;
+          }
+
+          if (listener.prev) {
+            listener.prev.next = listener.next;
+          } else {
+            first = listener.next;
+          }
+        };
+      }
+    };
+  }
+
+  var Subscription = function () {
+    function Subscription(store, parentSub) {
+      this.store = store;
+      this.parentSub = parentSub;
+      this.unsubscribe = null;
+      this.listeners = nullListeners;
+      this.handleChangeWrapper = this.handleChangeWrapper.bind(this);
+    }
+
+    var _proto = Subscription.prototype;
+
+    _proto.addNestedSub = function addNestedSub(listener) {
+      this.trySubscribe();
+      return this.listeners.subscribe(listener);
+    };
+
+    _proto.notifyNestedSubs = function notifyNestedSubs() {
+      this.listeners.notify();
+    };
+
+    _proto.handleChangeWrapper = function handleChangeWrapper() {
+      if (this.onStateChange) {
+        this.onStateChange();
+      }
+    };
+
+    _proto.isSubscribed = function isSubscribed() {
+      return Boolean(this.unsubscribe);
+    };
+
+    _proto.trySubscribe = function trySubscribe() {
+      if (!this.unsubscribe) {
+        this.unsubscribe = this.parentSub ? this.parentSub.addNestedSub(this.handleChangeWrapper) : this.store.subscribe(this.handleChangeWrapper);
+        this.listeners = createListenerCollection();
+      }
+    };
+
+    _proto.tryUnsubscribe = function tryUnsubscribe() {
+      if (this.unsubscribe) {
+        this.unsubscribe();
+        this.unsubscribe = null;
+        this.listeners.clear();
+        this.listeners = nullListeners;
+      }
+    };
+
+    return Subscription;
+  }();
+
+  exports["default"] = Subscription;
+},455,[456],"node_modules/react-redux/lib/utils/Subscription.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports.getBatch = exports.setBatch = void 0;
+
+  function defaultNoopBatch(callback) {
+    callback();
+  }
+
+  var batch = defaultNoopBatch;
+
+  var setBatch = function setBatch(newBatch) {
+    return batch = newBatch;
+  };
+
+  exports.setBatch = setBatch;
+
+  var getBatch = function getBatch() {
+    return batch;
+  };
+
+  exports.getBatch = getBatch;
+},456,[],"node_modules/react-redux/lib/utils/batch.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   "use strict";
 
@@ -97259,28 +97527,116 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       return (0, _hoistNonReactStatics["default"])(Connect, WrappedComponent);
     };
   }
-},455,[9,1,13,53,474,54,70,473,475,456],"node_modules/react-redux/lib/components/connectAdvanced.js");
+},457,[9,1,13,53,458,54,70,455,459,454],"node_modules/react-redux/lib/components/connectAdvanced.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  'use strict';
+
+  var reactIs = _$$_REQUIRE(_dependencyMap[0], "react-is");
+
+  var REACT_STATICS = {
+    childContextTypes: true,
+    contextType: true,
+    contextTypes: true,
+    defaultProps: true,
+    displayName: true,
+    getDefaultProps: true,
+    getDerivedStateFromError: true,
+    getDerivedStateFromProps: true,
+    mixins: true,
+    propTypes: true,
+    type: true
+  };
+  var KNOWN_STATICS = {
+    name: true,
+    length: true,
+    prototype: true,
+    caller: true,
+    callee: true,
+    arguments: true,
+    arity: true
+  };
+  var FORWARD_REF_STATICS = {
+    '$$typeof': true,
+    render: true,
+    defaultProps: true,
+    displayName: true,
+    propTypes: true
+  };
+  var MEMO_STATICS = {
+    '$$typeof': true,
+    compare: true,
+    defaultProps: true,
+    displayName: true,
+    propTypes: true,
+    type: true
+  };
+  var TYPE_STATICS = {};
+  TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
+  TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
+
+  function getStatics(component) {
+    if (reactIs.isMemo(component)) {
+      return MEMO_STATICS;
+    }
+
+    return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
+  }
+
+  var defineProperty = Object.defineProperty;
+  var getOwnPropertyNames = Object.getOwnPropertyNames;
+  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+  var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+  var getPrototypeOf = Object.getPrototypeOf;
+  var objectPrototype = Object.prototype;
+
+  function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
+    if (typeof sourceComponent !== 'string') {
+      if (objectPrototype) {
+        var inheritedComponent = getPrototypeOf(sourceComponent);
+
+        if (inheritedComponent && inheritedComponent !== objectPrototype) {
+          hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+        }
+      }
+
+      var keys = getOwnPropertyNames(sourceComponent);
+
+      if (getOwnPropertySymbols) {
+        keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+      }
+
+      var targetStatics = getStatics(targetComponent);
+      var sourceStatics = getStatics(sourceComponent);
+
+      for (var i = 0; i < keys.length; ++i) {
+        var key = keys[i];
+
+        if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
+          var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+
+          try {
+            defineProperty(targetComponent, key, descriptor);
+          } catch (e) {}
+        }
+      }
+    }
+
+    return targetComponent;
+  }
+
+  module.exports = hoistNonReactStatics;
+},458,[70],"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   "use strict";
 
-  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
-
   exports.__esModule = true;
-  exports["default"] = exports.ReactReduxContext = void 0;
+  exports.useIsomorphicLayoutEffect = void 0;
 
-  var _react = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "react"));
+  var _react = _$$_REQUIRE(_dependencyMap[0], "react");
 
-  var ReactReduxContext = _react["default"].createContext(null);
-
-  exports.ReactReduxContext = ReactReduxContext;
-
-  if (process.env.NODE_ENV !== 'production') {
-    ReactReduxContext.displayName = 'ReactRedux';
-  }
-
-  var _default = ReactReduxContext;
-  exports["default"] = _default;
-},456,[1,54],"node_modules/react-redux/lib/components/Context.js");
+  var useIsomorphicLayoutEffect = _react.useLayoutEffect;
+  exports.useIsomorphicLayoutEffect = useIsomorphicLayoutEffect;
+},459,[54],"node_modules/react-redux/lib/utils/useIsomorphicLayoutEffect.native.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   "use strict";
 
@@ -97375,209 +97731,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var _default = createConnect();
 
   exports["default"] = _default;
-},457,[1,13,53,455,463,477,478,479,480],"node_modules/react-redux/lib/connect/connect.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports.createDispatchHook = createDispatchHook;
-  exports.useDispatch = void 0;
-
-  var _Context = _$$_REQUIRE(_dependencyMap[0], "../components/Context");
-
-  var _useStore = _$$_REQUIRE(_dependencyMap[1], "./useStore");
-
-  function createDispatchHook(context) {
-    if (context === void 0) {
-      context = _Context.ReactReduxContext;
-    }
-
-    var useStore = context === _Context.ReactReduxContext ? _useStore.useStore : (0, _useStore.createStoreHook)(context);
-    return function useDispatch() {
-      var store = useStore();
-      return store.dispatch;
-    };
-  }
-
-  var useDispatch = createDispatchHook();
-  exports.useDispatch = useDispatch;
-},458,[456,460],"node_modules/react-redux/lib/hooks/useDispatch.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
-
-  exports.__esModule = true;
-  exports.createSelectorHook = createSelectorHook;
-  exports.useSelector = void 0;
-
-  var _react = _$$_REQUIRE(_dependencyMap[1], "react");
-
-  var _useReduxContext2 = _$$_REQUIRE(_dependencyMap[2], "./useReduxContext");
-
-  var _Subscription = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "../utils/Subscription"));
-
-  var _useIsomorphicLayoutEffect = _$$_REQUIRE(_dependencyMap[4], "../utils/useIsomorphicLayoutEffect");
-
-  var _Context = _$$_REQUIRE(_dependencyMap[5], "../components/Context");
-
-  var refEquality = function refEquality(a, b) {
-    return a === b;
-  };
-
-  function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub) {
-    var _useReducer = (0, _react.useReducer)(function (s) {
-      return s + 1;
-    }, 0),
-        forceRender = _useReducer[1];
-
-    var subscription = (0, _react.useMemo)(function () {
-      return new _Subscription["default"](store, contextSub);
-    }, [store, contextSub]);
-    var latestSubscriptionCallbackError = (0, _react.useRef)();
-    var latestSelector = (0, _react.useRef)();
-    var latestSelectedState = (0, _react.useRef)();
-    var selectedState;
-
-    try {
-      if (selector !== latestSelector.current || latestSubscriptionCallbackError.current) {
-        selectedState = selector(store.getState());
-      } else {
-        selectedState = latestSelectedState.current;
-      }
-    } catch (err) {
-      if (latestSubscriptionCallbackError.current) {
-        err.message += "\nThe error may be correlated with this previous error:\n" + latestSubscriptionCallbackError.current.stack + "\n\n";
-      }
-
-      throw err;
-    }
-
-    (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
-      latestSelector.current = selector;
-      latestSelectedState.current = selectedState;
-      latestSubscriptionCallbackError.current = undefined;
-    });
-    (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
-      function checkForUpdates() {
-        try {
-          var newSelectedState = latestSelector.current(store.getState());
-
-          if (equalityFn(newSelectedState, latestSelectedState.current)) {
-            return;
-          }
-
-          latestSelectedState.current = newSelectedState;
-        } catch (err) {
-          latestSubscriptionCallbackError.current = err;
-        }
-
-        forceRender({});
-      }
-
-      subscription.onStateChange = checkForUpdates;
-      subscription.trySubscribe();
-      checkForUpdates();
-      return function () {
-        return subscription.tryUnsubscribe();
-      };
-    }, [store, subscription]);
-    return selectedState;
-  }
-
-  function createSelectorHook(context) {
-    if (context === void 0) {
-      context = _Context.ReactReduxContext;
-    }
-
-    var useReduxContext = context === _Context.ReactReduxContext ? _useReduxContext2.useReduxContext : function () {
-      return (0, _react.useContext)(context);
-    };
-    return function useSelector(selector, equalityFn) {
-      if (equalityFn === void 0) {
-        equalityFn = refEquality;
-      }
-
-      if (process.env.NODE_ENV !== 'production' && !selector) {
-        throw new Error("You must pass a selector to useSelectors");
-      }
-
-      var _useReduxContext = useReduxContext(),
-          store = _useReduxContext.store,
-          contextSub = _useReduxContext.subscription;
-
-      return useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub);
-    };
-  }
-
-  var useSelector = createSelectorHook();
-  exports.useSelector = useSelector;
-},459,[1,54,476,473,475,456],"node_modules/react-redux/lib/hooks/useSelector.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports.createStoreHook = createStoreHook;
-  exports.useStore = void 0;
-
-  var _react = _$$_REQUIRE(_dependencyMap[0], "react");
-
-  var _Context = _$$_REQUIRE(_dependencyMap[1], "../components/Context");
-
-  var _useReduxContext2 = _$$_REQUIRE(_dependencyMap[2], "./useReduxContext");
-
-  function createStoreHook(context) {
-    if (context === void 0) {
-      context = _Context.ReactReduxContext;
-    }
-
-    var useReduxContext = context === _Context.ReactReduxContext ? _useReduxContext2.useReduxContext : function () {
-      return (0, _react.useContext)(context);
-    };
-    return function useStore() {
-      var _useReduxContext = useReduxContext(),
-          store = _useReduxContext.store;
-
-      return store;
-    };
-  }
-
-  var useStore = createStoreHook();
-  exports.useStore = useStore;
-},460,[54,456,476],"node_modules/react-redux/lib/hooks/useStore.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports.getBatch = exports.setBatch = void 0;
-
-  function defaultNoopBatch(callback) {
-    callback();
-  }
-
-  var batch = defaultNoopBatch;
-
-  var setBatch = function setBatch(newBatch) {
-    return batch = newBatch;
-  };
-
-  exports.setBatch = setBatch;
-
-  var getBatch = function getBatch() {
-    return batch;
-  };
-
-  exports.getBatch = getBatch;
-},461,[],"node_modules/react-redux/lib/utils/batch.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-
-  var _reactNative = _$$_REQUIRE(_dependencyMap[0], "react-native");
-
-  exports.unstable_batchedUpdates = _reactNative.unstable_batchedUpdates;
-},462,[2],"node_modules/react-redux/lib/utils/reactBatchedUpdates.native.js");
+},460,[1,13,53,457,461,462,470,471,472],"node_modules/react-redux/lib/connect/connect.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   "use strict";
 
@@ -97611,43 +97765,41 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
     return true;
   }
-},463,[],"node_modules/react-redux/lib/utils/shallowEqual.js");
+},461,[],"node_modules/react-redux/lib/utils/shallowEqual.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+  "use strict";
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.default = void 0;
+  exports.__esModule = true;
+  exports.whenMapDispatchToPropsIsFunction = whenMapDispatchToPropsIsFunction;
+  exports.whenMapDispatchToPropsIsMissing = whenMapDispatchToPropsIsMissing;
+  exports.whenMapDispatchToPropsIsObject = whenMapDispatchToPropsIsObject;
+  exports["default"] = void 0;
 
-  var _redux = _$$_REQUIRE(_dependencyMap[1], "redux");
+  var _redux = _$$_REQUIRE(_dependencyMap[0], "redux");
 
-  var _reduxLogger = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "redux-logger"));
+  var _wrapMapToProps = _$$_REQUIRE(_dependencyMap[1], "./wrapMapToProps");
 
-  var _reduxPromiseMiddleware = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "redux-promise-middleware"));
-
-  var _reduxDevtoolsExtension = _$$_REQUIRE(_dependencyMap[4], "redux-devtools-extension");
-
-  var _reduxThunk = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[5], "redux-thunk"));
-
-  var _appReducer = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[6], "../store/reducers/app-reducer"));
-
-  var rootReducer = (0, _redux.combineReducers)({
-    app: _appReducer.default
-  });
-  var composeEnhancers = _redux.compose;
-
-  if (__DEV__) {
-    composeEnhancers = _reduxDevtoolsExtension.composeWithDevTools || window.__REDUX_DEV_TOOLS_EXTENSION_COMPOSE__ || _redux.compose;
+  function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
+    return typeof mapDispatchToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;
   }
 
-  var configureStore = function configureStore() {
-    return (0, _redux.createStore)(rootReducer);
-  };
+  function whenMapDispatchToPropsIsMissing(mapDispatchToProps) {
+    return !mapDispatchToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {
+      return {
+        dispatch: dispatch
+      };
+    }) : undefined;
+  }
 
-  var _default = configureStore;
-  exports.default = _default;
-},464,[1,465,466,467,468,469,471],"source/store/configureStore.js");
+  function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
+    return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {
+      return (0, _redux.bindActionCreators)(mapDispatchToProps, dispatch);
+    }) : undefined;
+  }
+
+  var _default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];
+  exports["default"] = _default;
+},462,[463,466],"node_modules/react-redux/lib/connect/mapDispatchToProps.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   'use strict';
 
@@ -98109,7 +98261,704 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   exports.combineReducers = combineReducers;
   exports.compose = compose;
   exports.createStore = createStore;
-},465,[481],"node_modules/redux/lib/redux.js");
+},463,[464],"node_modules/redux/lib/redux.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _ponyfill = _$$_REQUIRE(_dependencyMap[0], "./ponyfill.js");
+
+  var _ponyfill2 = _interopRequireDefault(_ponyfill);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      'default': obj
+    };
+  }
+
+  var root;
+
+  if (typeof self !== 'undefined') {
+    root = self;
+  } else if (typeof window !== 'undefined') {
+    root = window;
+  } else if (typeof global !== 'undefined') {
+    root = global;
+  } else if (typeof module !== 'undefined') {
+    root = module;
+  } else {
+    root = Function('return this')();
+  }
+
+  var result = (0, _ponyfill2['default'])(root);
+  exports['default'] = result;
+},464,[465],"node_modules/redux/node_modules/symbol-observable/lib/index.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports['default'] = symbolObservablePonyfill;
+
+  function symbolObservablePonyfill(root) {
+    var result;
+    var _Symbol = root.Symbol;
+
+    if (typeof _Symbol === 'function') {
+      if (_Symbol.observable) {
+        result = _Symbol.observable;
+      } else {
+        result = _Symbol('observable');
+        _Symbol.observable = result;
+      }
+    } else {
+      result = '@@observable';
+    }
+
+    return result;
+  }
+
+  ;
+},465,[],"node_modules/redux/node_modules/symbol-observable/lib/ponyfill.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  exports.__esModule = true;
+  exports.wrapMapToPropsConstant = wrapMapToPropsConstant;
+  exports.getDependsOnOwnProps = getDependsOnOwnProps;
+  exports.wrapMapToPropsFunc = wrapMapToPropsFunc;
+
+  var _verifyPlainObject = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "../utils/verifyPlainObject"));
+
+  function wrapMapToPropsConstant(getConstant) {
+    return function initConstantSelector(dispatch, options) {
+      var constant = getConstant(dispatch, options);
+
+      function constantSelector() {
+        return constant;
+      }
+
+      constantSelector.dependsOnOwnProps = false;
+      return constantSelector;
+    };
+  }
+
+  function getDependsOnOwnProps(mapToProps) {
+    return mapToProps.dependsOnOwnProps !== null && mapToProps.dependsOnOwnProps !== undefined ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
+  }
+
+  function wrapMapToPropsFunc(mapToProps, methodName) {
+    return function initProxySelector(dispatch, _ref) {
+      var displayName = _ref.displayName;
+
+      var proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
+        return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
+      };
+
+      proxy.dependsOnOwnProps = true;
+
+      proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
+        proxy.mapToProps = mapToProps;
+        proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
+        var props = proxy(stateOrDispatch, ownProps);
+
+        if (typeof props === 'function') {
+          proxy.mapToProps = props;
+          proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
+          props = proxy(stateOrDispatch, ownProps);
+        }
+
+        if (process.env.NODE_ENV !== 'production') (0, _verifyPlainObject["default"])(props, displayName, methodName);
+        return props;
+      };
+
+      return proxy;
+    };
+  }
+},466,[1,467],"node_modules/react-redux/lib/connect/wrapMapToProps.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  exports.__esModule = true;
+  exports["default"] = verifyPlainObject;
+
+  var _isPlainObject = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "./isPlainObject"));
+
+  var _warning = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "./warning"));
+
+  function verifyPlainObject(value, displayName, methodName) {
+    if (!(0, _isPlainObject["default"])(value)) {
+      (0, _warning["default"])(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
+    }
+  }
+},467,[1,468,469],"node_modules/react-redux/lib/utils/verifyPlainObject.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports["default"] = isPlainObject;
+
+  function isPlainObject(obj) {
+    if (typeof obj !== 'object' || obj === null) return false;
+    var proto = Object.getPrototypeOf(obj);
+    if (proto === null) return true;
+    var baseProto = proto;
+
+    while (Object.getPrototypeOf(baseProto) !== null) {
+      baseProto = Object.getPrototypeOf(baseProto);
+    }
+
+    return proto === baseProto;
+  }
+},468,[],"node_modules/react-redux/lib/utils/isPlainObject.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports["default"] = warning;
+
+  function warning(message) {
+    if (typeof console !== 'undefined' && typeof console.error === 'function') {
+      console.error(message);
+    }
+
+    try {
+      throw new Error(message);
+    } catch (e) {}
+  }
+},469,[],"node_modules/react-redux/lib/utils/warning.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports.whenMapStateToPropsIsFunction = whenMapStateToPropsIsFunction;
+  exports.whenMapStateToPropsIsMissing = whenMapStateToPropsIsMissing;
+  exports["default"] = void 0;
+
+  var _wrapMapToProps = _$$_REQUIRE(_dependencyMap[0], "./wrapMapToProps");
+
+  function whenMapStateToPropsIsFunction(mapStateToProps) {
+    return typeof mapStateToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapStateToProps, 'mapStateToProps') : undefined;
+  }
+
+  function whenMapStateToPropsIsMissing(mapStateToProps) {
+    return !mapStateToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function () {
+      return {};
+    }) : undefined;
+  }
+
+  var _default = [whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing];
+  exports["default"] = _default;
+},470,[466],"node_modules/react-redux/lib/connect/mapStateToProps.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  exports.__esModule = true;
+  exports.defaultMergeProps = defaultMergeProps;
+  exports.wrapMergePropsFunc = wrapMergePropsFunc;
+  exports.whenMergePropsIsFunction = whenMergePropsIsFunction;
+  exports.whenMergePropsIsOmitted = whenMergePropsIsOmitted;
+  exports["default"] = void 0;
+
+  var _extends2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "@babel/runtime/helpers/extends"));
+
+  var _verifyPlainObject = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "../utils/verifyPlainObject"));
+
+  function defaultMergeProps(stateProps, dispatchProps, ownProps) {
+    return (0, _extends2["default"])({}, ownProps, {}, stateProps, {}, dispatchProps);
+  }
+
+  function wrapMergePropsFunc(mergeProps) {
+    return function initMergePropsProxy(dispatch, _ref) {
+      var displayName = _ref.displayName,
+          pure = _ref.pure,
+          areMergedPropsEqual = _ref.areMergedPropsEqual;
+      var hasRunOnce = false;
+      var mergedProps;
+      return function mergePropsProxy(stateProps, dispatchProps, ownProps) {
+        var nextMergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+
+        if (hasRunOnce) {
+          if (!pure || !areMergedPropsEqual(nextMergedProps, mergedProps)) mergedProps = nextMergedProps;
+        } else {
+          hasRunOnce = true;
+          mergedProps = nextMergedProps;
+          if (process.env.NODE_ENV !== 'production') (0, _verifyPlainObject["default"])(mergedProps, displayName, 'mergeProps');
+        }
+
+        return mergedProps;
+      };
+    };
+  }
+
+  function whenMergePropsIsFunction(mergeProps) {
+    return typeof mergeProps === 'function' ? wrapMergePropsFunc(mergeProps) : undefined;
+  }
+
+  function whenMergePropsIsOmitted(mergeProps) {
+    return !mergeProps ? function () {
+      return defaultMergeProps;
+    } : undefined;
+  }
+
+  var _default = [whenMergePropsIsFunction, whenMergePropsIsOmitted];
+  exports["default"] = _default;
+},471,[1,13,467],"node_modules/react-redux/lib/connect/mergeProps.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  exports.__esModule = true;
+  exports.impureFinalPropsSelectorFactory = impureFinalPropsSelectorFactory;
+  exports.pureFinalPropsSelectorFactory = pureFinalPropsSelectorFactory;
+  exports["default"] = finalPropsSelectorFactory;
+
+  var _objectWithoutPropertiesLoose2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+  var _verifySubselectors = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "./verifySubselectors"));
+
+  function impureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch) {
+    return function impureFinalPropsSelector(state, ownProps) {
+      return mergeProps(mapStateToProps(state, ownProps), mapDispatchToProps(dispatch, ownProps), ownProps);
+    };
+  }
+
+  function pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, _ref) {
+    var areStatesEqual = _ref.areStatesEqual,
+        areOwnPropsEqual = _ref.areOwnPropsEqual,
+        areStatePropsEqual = _ref.areStatePropsEqual;
+    var hasRunAtLeastOnce = false;
+    var state;
+    var ownProps;
+    var stateProps;
+    var dispatchProps;
+    var mergedProps;
+
+    function handleFirstCall(firstState, firstOwnProps) {
+      state = firstState;
+      ownProps = firstOwnProps;
+      stateProps = mapStateToProps(state, ownProps);
+      dispatchProps = mapDispatchToProps(dispatch, ownProps);
+      mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+      hasRunAtLeastOnce = true;
+      return mergedProps;
+    }
+
+    function handleNewPropsAndNewState() {
+      stateProps = mapStateToProps(state, ownProps);
+      if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
+      mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+      return mergedProps;
+    }
+
+    function handleNewProps() {
+      if (mapStateToProps.dependsOnOwnProps) stateProps = mapStateToProps(state, ownProps);
+      if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
+      mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+      return mergedProps;
+    }
+
+    function handleNewState() {
+      var nextStateProps = mapStateToProps(state, ownProps);
+      var statePropsChanged = !areStatePropsEqual(nextStateProps, stateProps);
+      stateProps = nextStateProps;
+      if (statePropsChanged) mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+      return mergedProps;
+    }
+
+    function handleSubsequentCalls(nextState, nextOwnProps) {
+      var propsChanged = !areOwnPropsEqual(nextOwnProps, ownProps);
+      var stateChanged = !areStatesEqual(nextState, state);
+      state = nextState;
+      ownProps = nextOwnProps;
+      if (propsChanged && stateChanged) return handleNewPropsAndNewState();
+      if (propsChanged) return handleNewProps();
+      if (stateChanged) return handleNewState();
+      return mergedProps;
+    }
+
+    return function pureFinalPropsSelector(nextState, nextOwnProps) {
+      return hasRunAtLeastOnce ? handleSubsequentCalls(nextState, nextOwnProps) : handleFirstCall(nextState, nextOwnProps);
+    };
+  }
+
+  function finalPropsSelectorFactory(dispatch, _ref2) {
+    var initMapStateToProps = _ref2.initMapStateToProps,
+        initMapDispatchToProps = _ref2.initMapDispatchToProps,
+        initMergeProps = _ref2.initMergeProps,
+        options = (0, _objectWithoutPropertiesLoose2["default"])(_ref2, ["initMapStateToProps", "initMapDispatchToProps", "initMergeProps"]);
+    var mapStateToProps = initMapStateToProps(dispatch, options);
+    var mapDispatchToProps = initMapDispatchToProps(dispatch, options);
+    var mergeProps = initMergeProps(dispatch, options);
+
+    if (process.env.NODE_ENV !== 'production') {
+      (0, _verifySubselectors["default"])(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName);
+    }
+
+    var selectorFactory = options.pure ? pureFinalPropsSelectorFactory : impureFinalPropsSelectorFactory;
+    return selectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
+  }
+},472,[1,53,473],"node_modules/react-redux/lib/connect/selectorFactory.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  exports.__esModule = true;
+  exports["default"] = verifySubselectors;
+
+  var _warning = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "../utils/warning"));
+
+  function verify(selector, methodName, displayName) {
+    if (!selector) {
+      throw new Error("Unexpected value for " + methodName + " in " + displayName + ".");
+    } else if (methodName === 'mapStateToProps' || methodName === 'mapDispatchToProps') {
+      if (!Object.prototype.hasOwnProperty.call(selector, 'dependsOnOwnProps')) {
+        (0, _warning["default"])("The selector for " + methodName + " of " + displayName + " did not specify a value for dependsOnOwnProps.");
+      }
+    }
+  }
+
+  function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, displayName) {
+    verify(mapStateToProps, 'mapStateToProps', displayName);
+    verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
+    verify(mergeProps, 'mergeProps', displayName);
+  }
+},473,[1,469],"node_modules/react-redux/lib/connect/verifySubselectors.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports.createDispatchHook = createDispatchHook;
+  exports.useDispatch = void 0;
+
+  var _Context = _$$_REQUIRE(_dependencyMap[0], "../components/Context");
+
+  var _useStore = _$$_REQUIRE(_dependencyMap[1], "./useStore");
+
+  function createDispatchHook(context) {
+    if (context === void 0) {
+      context = _Context.ReactReduxContext;
+    }
+
+    var useStore = context === _Context.ReactReduxContext ? _useStore.useStore : (0, _useStore.createStoreHook)(context);
+    return function useDispatch() {
+      var store = useStore();
+      return store.dispatch;
+    };
+  }
+
+  var useDispatch = createDispatchHook();
+  exports.useDispatch = useDispatch;
+},474,[454,475],"node_modules/react-redux/lib/hooks/useDispatch.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports.createStoreHook = createStoreHook;
+  exports.useStore = void 0;
+
+  var _react = _$$_REQUIRE(_dependencyMap[0], "react");
+
+  var _Context = _$$_REQUIRE(_dependencyMap[1], "../components/Context");
+
+  var _useReduxContext2 = _$$_REQUIRE(_dependencyMap[2], "./useReduxContext");
+
+  function createStoreHook(context) {
+    if (context === void 0) {
+      context = _Context.ReactReduxContext;
+    }
+
+    var useReduxContext = context === _Context.ReactReduxContext ? _useReduxContext2.useReduxContext : function () {
+      return (0, _react.useContext)(context);
+    };
+    return function useStore() {
+      var _useReduxContext = useReduxContext(),
+          store = _useReduxContext.store;
+
+      return store;
+    };
+  }
+
+  var useStore = createStoreHook();
+  exports.useStore = useStore;
+},475,[54,454,476],"node_modules/react-redux/lib/hooks/useStore.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports.useReduxContext = useReduxContext;
+
+  var _react = _$$_REQUIRE(_dependencyMap[0], "react");
+
+  var _Context = _$$_REQUIRE(_dependencyMap[1], "../components/Context");
+
+  function useReduxContext() {
+    var contextValue = (0, _react.useContext)(_Context.ReactReduxContext);
+
+    if (process.env.NODE_ENV !== 'production' && !contextValue) {
+      throw new Error('could not find react-redux context value; please ensure the component is wrapped in a <Provider>');
+    }
+
+    return contextValue;
+  }
+},476,[54,454],"node_modules/react-redux/lib/hooks/useReduxContext.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  exports.__esModule = true;
+  exports.createSelectorHook = createSelectorHook;
+  exports.useSelector = void 0;
+
+  var _react = _$$_REQUIRE(_dependencyMap[1], "react");
+
+  var _useReduxContext2 = _$$_REQUIRE(_dependencyMap[2], "./useReduxContext");
+
+  var _Subscription = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "../utils/Subscription"));
+
+  var _useIsomorphicLayoutEffect = _$$_REQUIRE(_dependencyMap[4], "../utils/useIsomorphicLayoutEffect");
+
+  var _Context = _$$_REQUIRE(_dependencyMap[5], "../components/Context");
+
+  var refEquality = function refEquality(a, b) {
+    return a === b;
+  };
+
+  function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub) {
+    var _useReducer = (0, _react.useReducer)(function (s) {
+      return s + 1;
+    }, 0),
+        forceRender = _useReducer[1];
+
+    var subscription = (0, _react.useMemo)(function () {
+      return new _Subscription["default"](store, contextSub);
+    }, [store, contextSub]);
+    var latestSubscriptionCallbackError = (0, _react.useRef)();
+    var latestSelector = (0, _react.useRef)();
+    var latestSelectedState = (0, _react.useRef)();
+    var selectedState;
+
+    try {
+      if (selector !== latestSelector.current || latestSubscriptionCallbackError.current) {
+        selectedState = selector(store.getState());
+      } else {
+        selectedState = latestSelectedState.current;
+      }
+    } catch (err) {
+      if (latestSubscriptionCallbackError.current) {
+        err.message += "\nThe error may be correlated with this previous error:\n" + latestSubscriptionCallbackError.current.stack + "\n\n";
+      }
+
+      throw err;
+    }
+
+    (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
+      latestSelector.current = selector;
+      latestSelectedState.current = selectedState;
+      latestSubscriptionCallbackError.current = undefined;
+    });
+    (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
+      function checkForUpdates() {
+        try {
+          var newSelectedState = latestSelector.current(store.getState());
+
+          if (equalityFn(newSelectedState, latestSelectedState.current)) {
+            return;
+          }
+
+          latestSelectedState.current = newSelectedState;
+        } catch (err) {
+          latestSubscriptionCallbackError.current = err;
+        }
+
+        forceRender({});
+      }
+
+      subscription.onStateChange = checkForUpdates;
+      subscription.trySubscribe();
+      checkForUpdates();
+      return function () {
+        return subscription.tryUnsubscribe();
+      };
+    }, [store, subscription]);
+    return selectedState;
+  }
+
+  function createSelectorHook(context) {
+    if (context === void 0) {
+      context = _Context.ReactReduxContext;
+    }
+
+    var useReduxContext = context === _Context.ReactReduxContext ? _useReduxContext2.useReduxContext : function () {
+      return (0, _react.useContext)(context);
+    };
+    return function useSelector(selector, equalityFn) {
+      if (equalityFn === void 0) {
+        equalityFn = refEquality;
+      }
+
+      if (process.env.NODE_ENV !== 'production' && !selector) {
+        throw new Error("You must pass a selector to useSelectors");
+      }
+
+      var _useReduxContext = useReduxContext(),
+          store = _useReduxContext.store,
+          contextSub = _useReduxContext.subscription;
+
+      return useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub);
+    };
+  }
+
+  var useSelector = createSelectorHook();
+  exports.useSelector = useSelector;
+},477,[1,54,476,455,459,454],"node_modules/react-redux/lib/hooks/useSelector.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  "use strict";
+
+  exports.__esModule = true;
+
+  var _reactNative = _$$_REQUIRE(_dependencyMap[0], "react-native");
+
+  exports.unstable_batchedUpdates = _reactNative.unstable_batchedUpdates;
+},478,[2],"node_modules/react-redux/lib/utils/reactBatchedUpdates.native.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.updateUserName = updateUserName;
+  exports.updateUserMobile = updateUserMobile;
+  exports.updateUserEmail = updateUserEmail;
+  exports.updateUserAddress = updateUserAddress;
+  exports.updateUserLocation = updateUserLocation;
+  exports.updateUserImage = updateUserImage;
+  exports.resetState = resetState;
+
+  var _constant = _$$_REQUIRE(_dependencyMap[0], "../constants/constant");
+
+  function updateUserName(name) {
+    return {
+      type: _constant.UPDATE_USER_NAME,
+      payload: name
+    };
+  }
+
+  function updateUserMobile(mobile) {
+    return {
+      type: _constant.UPDATE_USER_MOBILE,
+      payload: mobile
+    };
+  }
+
+  function updateUserEmail(email) {
+    return {
+      type: _constant.UPDATE_USER_EMAIL,
+      payload: email
+    };
+  }
+
+  function updateUserAddress(address) {
+    return {
+      type: _constant.UPDATE_USER_ADDRESS,
+      payload: address
+    };
+  }
+
+  function updateUserLocation(location) {
+    return {
+      type: _constant.UPDATE_USER_LOCATION,
+      payload: location
+    };
+  }
+
+  function updateUserImage(img) {
+    return {
+      type: _constant.UPDATE_USER_IMAGE,
+      payload: img
+    };
+  }
+
+  function resetState() {
+    return {
+      type: _constant.RESET_STATE,
+      payload: null
+    };
+  }
+},479,[480],"source/store/actions/app-action.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.RESET_STATE = exports.UPDATE_USER_LOCATION = exports.UPDATE_USER_ADDRESS = exports.UPDATE_USER_IMAGE = exports.UPDATE_USER_EMAIL = exports.UPDATE_USER_MOBILE = exports.UPDATE_USER_NAME = void 0;
+  var UPDATE_USER_NAME = 'UPDATE_USER_NAME';
+  exports.UPDATE_USER_NAME = UPDATE_USER_NAME;
+  var UPDATE_USER_MOBILE = 'UPDATE_USER_MOBILE';
+  exports.UPDATE_USER_MOBILE = UPDATE_USER_MOBILE;
+  var UPDATE_USER_EMAIL = 'UPDATE_USER_EMAIL';
+  exports.UPDATE_USER_EMAIL = UPDATE_USER_EMAIL;
+  var UPDATE_USER_IMAGE = 'UPDATE_USER_IMAGE';
+  exports.UPDATE_USER_IMAGE = UPDATE_USER_IMAGE;
+  var UPDATE_USER_ADDRESS = 'UPDATE_USER_ADDRESS';
+  exports.UPDATE_USER_ADDRESS = UPDATE_USER_ADDRESS;
+  var UPDATE_USER_LOCATION = 'UPDATE_USER_LOCATION';
+  exports.UPDATE_USER_LOCATION = UPDATE_USER_LOCATION;
+  var RESET_STATE = 'RESET_STATE';
+  exports.RESET_STATE = RESET_STATE;
+},480,[],"source/store/constants/constant.js");
+__d(function(global, require, _aUnused, _bUnused, module, exports, _cUnused) {
+  module.exports = {
+  "name": "employeeform",
+  "displayName": "employeeform"
+};
+},481,[],"app.json");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+
+  var _redux = _$$_REQUIRE(_dependencyMap[1], "redux");
+
+  var _reduxLogger = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "redux-logger"));
+
+  var _reduxPromiseMiddleware = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "redux-promise-middleware"));
+
+  var _reduxDevtoolsExtension = _$$_REQUIRE(_dependencyMap[4], "redux-devtools-extension");
+
+  var _reduxThunk = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[5], "redux-thunk"));
+
+  var _appReducer = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[6], "../store/reducers/app-reducer"));
+
+  var rootReducer = (0, _redux.combineReducers)({
+    app: _appReducer.default
+  });
+  var composeEnhancers = _redux.compose;
+
+  if (__DEV__) {
+    composeEnhancers = _reduxDevtoolsExtension.composeWithDevTools || window.__REDUX_DEV_TOOLS_EXTENSION_COMPOSE__ || _redux.compose;
+  }
+
+  var configureStore = function configureStore() {
+    return (0, _redux.createStore)(rootReducer);
+  };
+
+  var _default = configureStore;
+  exports.default = _default;
+},482,[1,463,483,484,486,487,488],"source/store/configureStore.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _extends = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/extends");
 
@@ -98725,7 +99574,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       value: !0
     });
   });
-},466,[13],"node_modules/redux-logger/dist/redux-logger.js");
+},483,[13],"node_modules/redux-logger/dist/redux-logger.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   'use strict';
 
@@ -98906,7 +99755,30 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
     return null;
   }
-},467,[482],"node_modules/redux-promise-middleware/dist/index.js");
+},484,[485],"node_modules/redux-promise-middleware/dist/index.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _typeof = typeof Symbol === "function" && typeof (typeof Symbol === "function" ? Symbol.iterator : "@@iterator") === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== (typeof Symbol === "function" ? Symbol.prototype : "@@prototype") ? "symbol" : typeof obj;
+  };
+
+  exports.default = isPromise;
+
+  function isPromise(value) {
+    if (value !== null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
+      return value && typeof value.then === 'function';
+    }
+
+    return false;
+  }
+},485,[],"node_modules/redux-promise-middleware/dist/isPromise.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   "use strict";
 
@@ -98923,7 +99795,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       return noop;
     };
   };
-},468,[465],"node_modules/redux-devtools-extension/index.js");
+},486,[463],"node_modules/redux-devtools-extension/index.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   'use strict';
 
@@ -98948,7 +99820,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var thunk = createThunkMiddleware();
   thunk.withExtraArgument = createThunkMiddleware;
   exports['default'] = thunk;
-},469,[],"node_modules/redux-thunk/lib/index.js");
+},487,[],"node_modules/redux-thunk/lib/index.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
 
@@ -98970,10 +99842,11 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     userEmail: '',
     userImgURL: '',
     userPhone: '',
-    userAddress: {
+    userLocation: {
       latitude: '',
       longitude: ''
-    }
+    },
+    userAddress: ''
   };
 
   var appReducer = function appReducer() {
@@ -98983,27 +99856,48 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     switch (action.type) {
       case _constant.UPDATE_USER_NAME:
         return _objectSpread({}, state, {
-          count: action.payload
+          userName: action.payload
         });
 
       case _constant.UPDATE_USER_MOBILE:
         return _objectSpread({}, state, {
-          count: action.payload
+          userPhone: action.payload
         });
 
       case _constant.UPDATE_USER_EMAIL:
         return _objectSpread({}, state, {
-          count: action.payload
+          userEmail: action.payload
         });
 
       case _constant.UPDATE_USER_ADDRESS:
         return _objectSpread({}, state, {
-          count: action.payload
+          userAddress: action.payload
+        });
+
+      case _constant.UPDATE_USER_LOCATION:
+        return _objectSpread({}, state, {
+          userLocation: action.payload
+        });
+
+      case _constant.UPDATE_USER_IMAGE:
+        return _objectSpread({}, state, {
+          userLocation: _objectSpread({}, state.userLocation, {
+            latitude: action.payload.latitude,
+            longitude: action.payload.longitude
+          })
         });
 
       case _constant.RESET_STATE:
         return _objectSpread({}, state, {
-          count: action.payload
+          userName: '',
+          userEmail: '',
+          userImgURL: '',
+          userPhone: '',
+          userLocation: {
+            latitude: '',
+            longitude: ''
+          },
+          userAddress: ''
         });
 
       default:
@@ -99013,712 +99907,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var _default = appReducer;
   exports.default = _default;
-},471,[1,46,483],"source/store/reducers/app-reducer.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports["default"] = void 0;
-
-  var _batch = _$$_REQUIRE(_dependencyMap[0], "./batch");
-
-  var nullListeners = {
-    notify: function notify() {}
-  };
-
-  function createListenerCollection() {
-    var batch = (0, _batch.getBatch)();
-    var first = null;
-    var last = null;
-    return {
-      clear: function clear() {
-        first = null;
-        last = null;
-      },
-      notify: function notify() {
-        batch(function () {
-          var listener = first;
-
-          while (listener) {
-            listener.callback();
-            listener = listener.next;
-          }
-        });
-      },
-      get: function get() {
-        var listeners = [];
-        var listener = first;
-
-        while (listener) {
-          listeners.push(listener);
-          listener = listener.next;
-        }
-
-        return listeners;
-      },
-      subscribe: function subscribe(callback) {
-        var isSubscribed = true;
-        var listener = last = {
-          callback: callback,
-          next: null,
-          prev: last
-        };
-
-        if (listener.prev) {
-          listener.prev.next = listener;
-        } else {
-          first = listener;
-        }
-
-        return function unsubscribe() {
-          if (!isSubscribed || first === null) return;
-          isSubscribed = false;
-
-          if (listener.next) {
-            listener.next.prev = listener.prev;
-          } else {
-            last = listener.prev;
-          }
-
-          if (listener.prev) {
-            listener.prev.next = listener.next;
-          } else {
-            first = listener.next;
-          }
-        };
-      }
-    };
-  }
-
-  var Subscription = function () {
-    function Subscription(store, parentSub) {
-      this.store = store;
-      this.parentSub = parentSub;
-      this.unsubscribe = null;
-      this.listeners = nullListeners;
-      this.handleChangeWrapper = this.handleChangeWrapper.bind(this);
-    }
-
-    var _proto = Subscription.prototype;
-
-    _proto.addNestedSub = function addNestedSub(listener) {
-      this.trySubscribe();
-      return this.listeners.subscribe(listener);
-    };
-
-    _proto.notifyNestedSubs = function notifyNestedSubs() {
-      this.listeners.notify();
-    };
-
-    _proto.handleChangeWrapper = function handleChangeWrapper() {
-      if (this.onStateChange) {
-        this.onStateChange();
-      }
-    };
-
-    _proto.isSubscribed = function isSubscribed() {
-      return Boolean(this.unsubscribe);
-    };
-
-    _proto.trySubscribe = function trySubscribe() {
-      if (!this.unsubscribe) {
-        this.unsubscribe = this.parentSub ? this.parentSub.addNestedSub(this.handleChangeWrapper) : this.store.subscribe(this.handleChangeWrapper);
-        this.listeners = createListenerCollection();
-      }
-    };
-
-    _proto.tryUnsubscribe = function tryUnsubscribe() {
-      if (this.unsubscribe) {
-        this.unsubscribe();
-        this.unsubscribe = null;
-        this.listeners.clear();
-        this.listeners = nullListeners;
-      }
-    };
-
-    return Subscription;
-  }();
-
-  exports["default"] = Subscription;
-},473,[461],"node_modules/react-redux/lib/utils/Subscription.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  'use strict';
-
-  var reactIs = _$$_REQUIRE(_dependencyMap[0], "react-is");
-
-  var REACT_STATICS = {
-    childContextTypes: true,
-    contextType: true,
-    contextTypes: true,
-    defaultProps: true,
-    displayName: true,
-    getDefaultProps: true,
-    getDerivedStateFromError: true,
-    getDerivedStateFromProps: true,
-    mixins: true,
-    propTypes: true,
-    type: true
-  };
-  var KNOWN_STATICS = {
-    name: true,
-    length: true,
-    prototype: true,
-    caller: true,
-    callee: true,
-    arguments: true,
-    arity: true
-  };
-  var FORWARD_REF_STATICS = {
-    '$$typeof': true,
-    render: true,
-    defaultProps: true,
-    displayName: true,
-    propTypes: true
-  };
-  var MEMO_STATICS = {
-    '$$typeof': true,
-    compare: true,
-    defaultProps: true,
-    displayName: true,
-    propTypes: true,
-    type: true
-  };
-  var TYPE_STATICS = {};
-  TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
-  TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
-
-  function getStatics(component) {
-    if (reactIs.isMemo(component)) {
-      return MEMO_STATICS;
-    }
-
-    return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
-  }
-
-  var defineProperty = Object.defineProperty;
-  var getOwnPropertyNames = Object.getOwnPropertyNames;
-  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-  var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-  var getPrototypeOf = Object.getPrototypeOf;
-  var objectPrototype = Object.prototype;
-
-  function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-    if (typeof sourceComponent !== 'string') {
-      if (objectPrototype) {
-        var inheritedComponent = getPrototypeOf(sourceComponent);
-
-        if (inheritedComponent && inheritedComponent !== objectPrototype) {
-          hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-        }
-      }
-
-      var keys = getOwnPropertyNames(sourceComponent);
-
-      if (getOwnPropertySymbols) {
-        keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-      }
-
-      var targetStatics = getStatics(targetComponent);
-      var sourceStatics = getStatics(sourceComponent);
-
-      for (var i = 0; i < keys.length; ++i) {
-        var key = keys[i];
-
-        if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
-          var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-
-          try {
-            defineProperty(targetComponent, key, descriptor);
-          } catch (e) {}
-        }
-      }
-    }
-
-    return targetComponent;
-  }
-
-  module.exports = hoistNonReactStatics;
-},474,[70],"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports.useIsomorphicLayoutEffect = void 0;
-
-  var _react = _$$_REQUIRE(_dependencyMap[0], "react");
-
-  var useIsomorphicLayoutEffect = _react.useLayoutEffect;
-  exports.useIsomorphicLayoutEffect = useIsomorphicLayoutEffect;
-},475,[54],"node_modules/react-redux/lib/utils/useIsomorphicLayoutEffect.native.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports.useReduxContext = useReduxContext;
-
-  var _react = _$$_REQUIRE(_dependencyMap[0], "react");
-
-  var _Context = _$$_REQUIRE(_dependencyMap[1], "../components/Context");
-
-  function useReduxContext() {
-    var contextValue = (0, _react.useContext)(_Context.ReactReduxContext);
-
-    if (process.env.NODE_ENV !== 'production' && !contextValue) {
-      throw new Error('could not find react-redux context value; please ensure the component is wrapped in a <Provider>');
-    }
-
-    return contextValue;
-  }
-},476,[54,456],"node_modules/react-redux/lib/hooks/useReduxContext.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports.whenMapDispatchToPropsIsFunction = whenMapDispatchToPropsIsFunction;
-  exports.whenMapDispatchToPropsIsMissing = whenMapDispatchToPropsIsMissing;
-  exports.whenMapDispatchToPropsIsObject = whenMapDispatchToPropsIsObject;
-  exports["default"] = void 0;
-
-  var _redux = _$$_REQUIRE(_dependencyMap[0], "redux");
-
-  var _wrapMapToProps = _$$_REQUIRE(_dependencyMap[1], "./wrapMapToProps");
-
-  function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
-    return typeof mapDispatchToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;
-  }
-
-  function whenMapDispatchToPropsIsMissing(mapDispatchToProps) {
-    return !mapDispatchToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {
-      return {
-        dispatch: dispatch
-      };
-    }) : undefined;
-  }
-
-  function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
-    return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {
-      return (0, _redux.bindActionCreators)(mapDispatchToProps, dispatch);
-    }) : undefined;
-  }
-
-  var _default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];
-  exports["default"] = _default;
-},477,[465,484],"node_modules/react-redux/lib/connect/mapDispatchToProps.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports.whenMapStateToPropsIsFunction = whenMapStateToPropsIsFunction;
-  exports.whenMapStateToPropsIsMissing = whenMapStateToPropsIsMissing;
-  exports["default"] = void 0;
-
-  var _wrapMapToProps = _$$_REQUIRE(_dependencyMap[0], "./wrapMapToProps");
-
-  function whenMapStateToPropsIsFunction(mapStateToProps) {
-    return typeof mapStateToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapStateToProps, 'mapStateToProps') : undefined;
-  }
-
-  function whenMapStateToPropsIsMissing(mapStateToProps) {
-    return !mapStateToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function () {
-      return {};
-    }) : undefined;
-  }
-
-  var _default = [whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing];
-  exports["default"] = _default;
-},478,[484],"node_modules/react-redux/lib/connect/mapStateToProps.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
-
-  exports.__esModule = true;
-  exports.defaultMergeProps = defaultMergeProps;
-  exports.wrapMergePropsFunc = wrapMergePropsFunc;
-  exports.whenMergePropsIsFunction = whenMergePropsIsFunction;
-  exports.whenMergePropsIsOmitted = whenMergePropsIsOmitted;
-  exports["default"] = void 0;
-
-  var _extends2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "@babel/runtime/helpers/extends"));
-
-  var _verifyPlainObject = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "../utils/verifyPlainObject"));
-
-  function defaultMergeProps(stateProps, dispatchProps, ownProps) {
-    return (0, _extends2["default"])({}, ownProps, {}, stateProps, {}, dispatchProps);
-  }
-
-  function wrapMergePropsFunc(mergeProps) {
-    return function initMergePropsProxy(dispatch, _ref) {
-      var displayName = _ref.displayName,
-          pure = _ref.pure,
-          areMergedPropsEqual = _ref.areMergedPropsEqual;
-      var hasRunOnce = false;
-      var mergedProps;
-      return function mergePropsProxy(stateProps, dispatchProps, ownProps) {
-        var nextMergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-
-        if (hasRunOnce) {
-          if (!pure || !areMergedPropsEqual(nextMergedProps, mergedProps)) mergedProps = nextMergedProps;
-        } else {
-          hasRunOnce = true;
-          mergedProps = nextMergedProps;
-          if (process.env.NODE_ENV !== 'production') (0, _verifyPlainObject["default"])(mergedProps, displayName, 'mergeProps');
-        }
-
-        return mergedProps;
-      };
-    };
-  }
-
-  function whenMergePropsIsFunction(mergeProps) {
-    return typeof mergeProps === 'function' ? wrapMergePropsFunc(mergeProps) : undefined;
-  }
-
-  function whenMergePropsIsOmitted(mergeProps) {
-    return !mergeProps ? function () {
-      return defaultMergeProps;
-    } : undefined;
-  }
-
-  var _default = [whenMergePropsIsFunction, whenMergePropsIsOmitted];
-  exports["default"] = _default;
-},479,[1,13,485],"node_modules/react-redux/lib/connect/mergeProps.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
-
-  exports.__esModule = true;
-  exports.impureFinalPropsSelectorFactory = impureFinalPropsSelectorFactory;
-  exports.pureFinalPropsSelectorFactory = pureFinalPropsSelectorFactory;
-  exports["default"] = finalPropsSelectorFactory;
-
-  var _objectWithoutPropertiesLoose2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-
-  var _verifySubselectors = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "./verifySubselectors"));
-
-  function impureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch) {
-    return function impureFinalPropsSelector(state, ownProps) {
-      return mergeProps(mapStateToProps(state, ownProps), mapDispatchToProps(dispatch, ownProps), ownProps);
-    };
-  }
-
-  function pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, _ref) {
-    var areStatesEqual = _ref.areStatesEqual,
-        areOwnPropsEqual = _ref.areOwnPropsEqual,
-        areStatePropsEqual = _ref.areStatePropsEqual;
-    var hasRunAtLeastOnce = false;
-    var state;
-    var ownProps;
-    var stateProps;
-    var dispatchProps;
-    var mergedProps;
-
-    function handleFirstCall(firstState, firstOwnProps) {
-      state = firstState;
-      ownProps = firstOwnProps;
-      stateProps = mapStateToProps(state, ownProps);
-      dispatchProps = mapDispatchToProps(dispatch, ownProps);
-      mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-      hasRunAtLeastOnce = true;
-      return mergedProps;
-    }
-
-    function handleNewPropsAndNewState() {
-      stateProps = mapStateToProps(state, ownProps);
-      if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
-      mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-      return mergedProps;
-    }
-
-    function handleNewProps() {
-      if (mapStateToProps.dependsOnOwnProps) stateProps = mapStateToProps(state, ownProps);
-      if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
-      mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-      return mergedProps;
-    }
-
-    function handleNewState() {
-      var nextStateProps = mapStateToProps(state, ownProps);
-      var statePropsChanged = !areStatePropsEqual(nextStateProps, stateProps);
-      stateProps = nextStateProps;
-      if (statePropsChanged) mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-      return mergedProps;
-    }
-
-    function handleSubsequentCalls(nextState, nextOwnProps) {
-      var propsChanged = !areOwnPropsEqual(nextOwnProps, ownProps);
-      var stateChanged = !areStatesEqual(nextState, state);
-      state = nextState;
-      ownProps = nextOwnProps;
-      if (propsChanged && stateChanged) return handleNewPropsAndNewState();
-      if (propsChanged) return handleNewProps();
-      if (stateChanged) return handleNewState();
-      return mergedProps;
-    }
-
-    return function pureFinalPropsSelector(nextState, nextOwnProps) {
-      return hasRunAtLeastOnce ? handleSubsequentCalls(nextState, nextOwnProps) : handleFirstCall(nextState, nextOwnProps);
-    };
-  }
-
-  function finalPropsSelectorFactory(dispatch, _ref2) {
-    var initMapStateToProps = _ref2.initMapStateToProps,
-        initMapDispatchToProps = _ref2.initMapDispatchToProps,
-        initMergeProps = _ref2.initMergeProps,
-        options = (0, _objectWithoutPropertiesLoose2["default"])(_ref2, ["initMapStateToProps", "initMapDispatchToProps", "initMergeProps"]);
-    var mapStateToProps = initMapStateToProps(dispatch, options);
-    var mapDispatchToProps = initMapDispatchToProps(dispatch, options);
-    var mergeProps = initMergeProps(dispatch, options);
-
-    if (process.env.NODE_ENV !== 'production') {
-      (0, _verifySubselectors["default"])(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName);
-    }
-
-    var selectorFactory = options.pure ? pureFinalPropsSelectorFactory : impureFinalPropsSelectorFactory;
-    return selectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
-  }
-},480,[1,53,486],"node_modules/react-redux/lib/connect/selectorFactory.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  var _ponyfill = _$$_REQUIRE(_dependencyMap[0], "./ponyfill.js");
-
-  var _ponyfill2 = _interopRequireDefault(_ponyfill);
-
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-      'default': obj
-    };
-  }
-
-  var root;
-
-  if (typeof self !== 'undefined') {
-    root = self;
-  } else if (typeof window !== 'undefined') {
-    root = window;
-  } else if (typeof global !== 'undefined') {
-    root = global;
-  } else if (typeof module !== 'undefined') {
-    root = module;
-  } else {
-    root = Function('return this')();
-  }
-
-  var result = (0, _ponyfill2['default'])(root);
-  exports['default'] = result;
-},481,[487],"node_modules/redux/node_modules/symbol-observable/lib/index.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  var _typeof = typeof Symbol === "function" && typeof (typeof Symbol === "function" ? Symbol.iterator : "@@iterator") === "symbol" ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== (typeof Symbol === "function" ? Symbol.prototype : "@@prototype") ? "symbol" : typeof obj;
-  };
-
-  exports.default = isPromise;
-
-  function isPromise(value) {
-    if (value !== null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
-      return value && typeof value.then === 'function';
-    }
-
-    return false;
-  }
-},482,[],"node_modules/redux-promise-middleware/dist/isPromise.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.RESET_STATE = exports.UPDATE_USER_ADDRESS = exports.UPDATE_USER_IMAGE = exports.UPDATE_USER_EMAIL = exports.UPDATE_USER_MOBILE = exports.UPDATE_USER_NAME = void 0;
-  var UPDATE_USER_NAME = 'UPDATE_USER_NAME';
-  exports.UPDATE_USER_NAME = UPDATE_USER_NAME;
-  var UPDATE_USER_MOBILE = 'UPDATE_USER_MOBILE';
-  exports.UPDATE_USER_MOBILE = UPDATE_USER_MOBILE;
-  var UPDATE_USER_EMAIL = 'UPDATE_USER_EMAIL';
-  exports.UPDATE_USER_EMAIL = UPDATE_USER_EMAIL;
-  var UPDATE_USER_IMAGE = 'UPDATE_USER_IMAGE';
-  exports.UPDATE_USER_IMAGE = UPDATE_USER_IMAGE;
-  var UPDATE_USER_ADDRESS = 'UPDATE_USER_ADDRESS';
-  exports.UPDATE_USER_ADDRESS = UPDATE_USER_ADDRESS;
-  var RESET_STATE = 'RESET_STATE';
-  exports.RESET_STATE = RESET_STATE;
-},483,[],"source/store/constants/constant.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
-
-  exports.__esModule = true;
-  exports.wrapMapToPropsConstant = wrapMapToPropsConstant;
-  exports.getDependsOnOwnProps = getDependsOnOwnProps;
-  exports.wrapMapToPropsFunc = wrapMapToPropsFunc;
-
-  var _verifyPlainObject = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "../utils/verifyPlainObject"));
-
-  function wrapMapToPropsConstant(getConstant) {
-    return function initConstantSelector(dispatch, options) {
-      var constant = getConstant(dispatch, options);
-
-      function constantSelector() {
-        return constant;
-      }
-
-      constantSelector.dependsOnOwnProps = false;
-      return constantSelector;
-    };
-  }
-
-  function getDependsOnOwnProps(mapToProps) {
-    return mapToProps.dependsOnOwnProps !== null && mapToProps.dependsOnOwnProps !== undefined ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
-  }
-
-  function wrapMapToPropsFunc(mapToProps, methodName) {
-    return function initProxySelector(dispatch, _ref) {
-      var displayName = _ref.displayName;
-
-      var proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
-        return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
-      };
-
-      proxy.dependsOnOwnProps = true;
-
-      proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
-        proxy.mapToProps = mapToProps;
-        proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
-        var props = proxy(stateOrDispatch, ownProps);
-
-        if (typeof props === 'function') {
-          proxy.mapToProps = props;
-          proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
-          props = proxy(stateOrDispatch, ownProps);
-        }
-
-        if (process.env.NODE_ENV !== 'production') (0, _verifyPlainObject["default"])(props, displayName, methodName);
-        return props;
-      };
-
-      return proxy;
-    };
-  }
-},484,[1,485],"node_modules/react-redux/lib/connect/wrapMapToProps.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
-
-  exports.__esModule = true;
-  exports["default"] = verifyPlainObject;
-
-  var _isPlainObject = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "./isPlainObject"));
-
-  var _warning = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "./warning"));
-
-  function verifyPlainObject(value, displayName, methodName) {
-    if (!(0, _isPlainObject["default"])(value)) {
-      (0, _warning["default"])(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
-    }
-  }
-},485,[1,488,489],"node_modules/react-redux/lib/utils/verifyPlainObject.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
-
-  exports.__esModule = true;
-  exports["default"] = verifySubselectors;
-
-  var _warning = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "../utils/warning"));
-
-  function verify(selector, methodName, displayName) {
-    if (!selector) {
-      throw new Error("Unexpected value for " + methodName + " in " + displayName + ".");
-    } else if (methodName === 'mapStateToProps' || methodName === 'mapDispatchToProps') {
-      if (!Object.prototype.hasOwnProperty.call(selector, 'dependsOnOwnProps')) {
-        (0, _warning["default"])("The selector for " + methodName + " of " + displayName + " did not specify a value for dependsOnOwnProps.");
-      }
-    }
-  }
-
-  function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, displayName) {
-    verify(mapStateToProps, 'mapStateToProps', displayName);
-    verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
-    verify(mergeProps, 'mergeProps', displayName);
-  }
-},486,[1,489],"node_modules/react-redux/lib/connect/verifySubselectors.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports['default'] = symbolObservablePonyfill;
-
-  function symbolObservablePonyfill(root) {
-    var result;
-    var _Symbol = root.Symbol;
-
-    if (typeof _Symbol === 'function') {
-      if (_Symbol.observable) {
-        result = _Symbol.observable;
-      } else {
-        result = _Symbol('observable');
-        _Symbol.observable = result;
-      }
-    } else {
-      result = '@@observable';
-    }
-
-    return result;
-  }
-
-  ;
-},487,[],"node_modules/redux/node_modules/symbol-observable/lib/ponyfill.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports["default"] = isPlainObject;
-
-  function isPlainObject(obj) {
-    if (typeof obj !== 'object' || obj === null) return false;
-    var proto = Object.getPrototypeOf(obj);
-    if (proto === null) return true;
-    var baseProto = proto;
-
-    while (Object.getPrototypeOf(baseProto) !== null) {
-      baseProto = Object.getPrototypeOf(baseProto);
-    }
-
-    return proto === baseProto;
-  }
-},488,[],"node_modules/react-redux/lib/utils/isPlainObject.js");
-__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
-  "use strict";
-
-  exports.__esModule = true;
-  exports["default"] = warning;
-
-  function warning(message) {
-    if (typeof console !== 'undefined' && typeof console.error === 'function') {
-      console.error(message);
-    }
-
-    try {
-      throw new Error(message);
-    } catch (e) {}
-  }
-},489,[],"node_modules/react-redux/lib/utils/warning.js");
+},488,[1,46,480],"source/store/reducers/app-reducer.js");
 __r(91);
 __r(0);
 //# sourceMappingURL=index.map

@@ -10,6 +10,8 @@ import {
   updateUserEmail,
   updateUserMobile,
   updateUserName,
+  updateUserLocation,
+  updateUserImage,
 } from '../source/store/actions/app-action';
 
 const mapStateToProps = state => ({
@@ -18,6 +20,7 @@ const mapStateToProps = state => ({
   userEmail: state.app.userEmail,
   userAddress: state.app.userAddress,
   userImgUrl: state.app.userImgUrl,
+  userLocation: state.app.userLocation,
 });
 
 // const ActionCreators = Object.assign({}, changeCount);
@@ -26,10 +29,11 @@ const mapDispatchToProps = dispatch => ({
   updateName: name => dispatch(updateUserName(name)),
   updateMobile: mobile => dispatch(updateUserMobile(mobile)),
   updateAddress: address => dispatch(updateUserAddress(address)),
+  updateLocation: location => dispatch(updateUserLocation(location)),
   updateEmail: email => dispatch(updateUserEmail(email)),
+  updateImage: img => dispatch(updateUserImage(img)),
   updateState: () => dispatch(resetState()),
 });
-
 class AddEmployee extends PureComponent {
   constructor() {
     super();
@@ -88,6 +92,7 @@ class AddEmployee extends PureComponent {
           longitude: location.longitude,
           latitude: location.latitude,
         });
+        updateUserLocation(location);
       })
       .catch(error => {
         const {code, message} = error;
@@ -95,13 +100,31 @@ class AddEmployee extends PureComponent {
       });
   }
 
-  onNext = (placeholder, data) => {
+  onNext = async (placeholder, data) => {
+    let {
+      updateName,
+      updateAddress,
+      updateEmail,
+      updateMobile,
+      updateImage,
+    } = this.props;
     console.log('pressed', data);
-    if (placeholder === 'Upload Image') this.setState({image: data});
-    if (placeholder === 'Enter name') this.setState({name: data});
-    if (placeholder === 'Enter email') this.setState({email: data});
-    if (placeholder === 'Enter phone') this.setState({phoneNumber: data});
-    if (placeholder === 'Enter address') this.setState({address: data});
+    if (placeholder === 'Upload Image') {
+      this.setState({image: data});
+      updateImage(data);
+    } else if (placeholder === 'Enter name') {
+      await this.setState({name: data});
+      await updateName(data);
+    } else if (placeholder === 'Enter email') {
+      this.setState({email: data});
+      updateEmail(data);
+    } else if (placeholder === 'Enter phone') {
+      this.setState({phoneNumber: data});
+      updateMobile(data);
+    } else if (placeholder === 'Enter address') {
+      this.setState({address: data});
+      updateAddress(data);
+    }
   };
 
   renderName = () => {

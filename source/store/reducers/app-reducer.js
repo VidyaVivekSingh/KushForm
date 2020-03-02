@@ -3,6 +3,8 @@ import {
   UPDATE_USER_MOBILE,
   UPDATE_USER_EMAIL,
   UPDATE_USER_ADDRESS,
+  UPDATE_USER_LOCATION,
+  UPDATE_USER_IMAGE,
   RESET_STATE,
 } from '../constants/constant';
 
@@ -11,10 +13,11 @@ const initialState = {
   userEmail: '',
   userImgURL: '',
   userPhone: '',
-  userAddress: {
+  userLocation: {
     latitude: '',
     longitude: '',
   },
+  userAddress: '',
 };
 
 const appReducer = (state = initialState, action) => {
@@ -22,27 +25,49 @@ const appReducer = (state = initialState, action) => {
     case UPDATE_USER_NAME:
       return {
         ...state,
-        count: action.payload,
+        userName: action.payload,
       };
     case UPDATE_USER_MOBILE:
       return {
         ...state,
-        count: action.payload,
+        userPhone: action.payload,
       };
     case UPDATE_USER_EMAIL:
       return {
         ...state,
-        count: action.payload,
+        userEmail: action.payload,
       };
     case UPDATE_USER_ADDRESS:
       return {
         ...state,
-        count: action.payload,
+        userAddress: action.payload,
+      };
+    case UPDATE_USER_LOCATION:
+      return {
+        ...state,
+        userLocation: action.payload,
+      };
+    case UPDATE_USER_IMAGE:
+      return {
+        ...state,
+        userLocation: {
+          ...state.userLocation,
+          latitude: action.payload.latitude,
+          longitude: action.payload.longitude,
+        },
       };
     case RESET_STATE:
       return {
         ...state,
-        count: action.payload,
+        userName: '',
+        userEmail: '',
+        userImgURL: '',
+        userPhone: '',
+        userLocation: {
+          latitude: '',
+          longitude: '',
+        },
+        userAddress: '',
       };
     default:
       return state;
